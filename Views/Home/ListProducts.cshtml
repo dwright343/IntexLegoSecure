@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+@model DefaultListViewModel
+<link rel="stylesheet" href="~/css/Style.css" />
+
+
+<h1>Aurora Bricks</h1>
+
+<h4>The things in the database should show up below:</h4>
+
+
+<h1 class="heading">Our <span>Products</span> </h1>
+
+@foreach (Product d in Model.Products)
+{
+    <partial name="SingleProductPartial" model="d" />
+}
+
+@* <a asp-controller="Home" asp-action="Index" asp-route-pageNum="1">1</a>
+<a asp-controller="Home" asp-action="Index" asp-route-pageNum="2">2</a>
+<a asp-controller="Home" asp-action="Index" asp-route-pageNum="3">3</a> *@
+
+<div page-model="@Model.PaginationInfo" page-action="ListProducts" page-classes-enabled="true" page-class="btn"
+     page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
+     page-url-Name="@Model.CurrentPrimaryColor" class="btn-group pull-right m-1"></div>

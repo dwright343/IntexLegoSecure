@@ -1,0 +1,49 @@
+﻿@using IntexLegoSecure.Infrastructure
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Product
+<link rel="stylesheet" href="~/css/Style.css" />
+
+<div>
+
+    <section class="products" id="products">
+        @* <h1 class="heading">Our <span>Products</span> </h1> *@
+
+        <div class="box-container">
+
+            <div class="box">
+
+                <div class="image">
+                    <img src="@Model.ImgLink" />
+                    <div class="icons">
+                        <form id=@Model.ProductId method="post" asp-page="/Cart">
+                            <input type="hidden" asp-for="ProductId" />
+                            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                            <a href="#" class="cart-btn"><span class="fas fa-shopping-cart"></span></a>
+                        </form>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>@Model.Name</h3>
+                    <div class="price">@Model.Price</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+
+</div>
+
+
+
+
+
+
+
