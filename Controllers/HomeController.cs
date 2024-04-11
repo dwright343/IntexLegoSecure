@@ -8,7 +8,7 @@ using IntexLegoSecure.ViewModels;
 
 namespace IntexLegoSecure.Controllers
 {
-    [Authorize]
+
     public class HomeController : Controller
     {
         //private readonly ILogger<HomeController> _logger;
@@ -18,17 +18,13 @@ namespace IntexLegoSecure.Controllers
         //    _logger = logger;
         //}
 
-        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
 
-        [Authorize(Roles = "Admin")]
-        public IActionResult Products()
-        {
-            return View();
-        }
+   
+
 
         private I_Repository _repo;
         public HomeController(I_Repository temp)

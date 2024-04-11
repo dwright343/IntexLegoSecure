@@ -9,7 +9,7 @@
         <span> with Shadow the Hedgehog </span>
         <p>Action play and thrills boost the creative fun in this cool LEGO® Sonic the Hedgehog™ Shadow the 
             Hedgehog Escape toy for kids. </p>
-        <a asp-area="" asp-controller="Home" asp-action="Products" class="btn">Shop Now</a>
+        <a asp-area="" asp-controller="Home" asp-action="ListProducts" class="btn">Shop Now</a>
 
     </div>
 
@@ -62,7 +62,7 @@
     </div>
 </section>
 
-@* icons at the bottom of page*@
+@* icons at the bottom of page*@ 
 <section class="icons-container">
 
     <div class="icons">
@@ -90,3 +90,47 @@
     </div>
 
 </section>
+
+<div class="cookie-notification">
+    <div class="cookie-content">
+        <p>This website uses cookies to ensure you get the best experience on our website.</p>
+        <button class="accept-btn" onclick="hideNotification()">Accept</button>
+    </div>
+</div>
+
+<style>
+    .cookie-notification {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #f8f8f8;
+        padding: 20px;
+        z-index: 9999;
+    }
+
+    .cookie-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .cookie-content p {
+        margin: 0;
+    }
+
+    .accept-btn {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    function hideNotification() {
+        var notification = document.querySelector('.cookie-notification');
+        notification.style.display = 'none';
+    }
+</script>
