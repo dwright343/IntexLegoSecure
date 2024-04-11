@@ -3,15 +3,36 @@ using IntexLegoSecure.Data;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.CodeAnalysis.Scripting;
 //using IntexLegoSecure.Areas.Identity.Data;
 
 public class Program
 {
+
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddHsts(options =>
+        {
+            options.Preload = true;
+            options.IncludeSubDomains = true;
+            options.MaxAge = TimeSpan.FromDays(365); 
+        });
+    }
+
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        app.UseHsts();
+    }
+
+
     public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
         var services = builder.Services;
         var configuration = builder.Configuration;
+
+
 
         // Add services to the container.
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -64,6 +85,20 @@ public class Program
 
         app.UseAuthentication();
         app.UseAuthorization();
+
+        //app.Use(async (context, next) =>
+        //{
+        //    context.Response.Headers.Add("X-Context-Type-Options", "nosniff");
+        //    context.Response.Headers.Add("X-XSS-Protection", "1; mode=block");
+        //    context.Response.Headers.Add("Referrer-Policy", "no-referrer");
+        //    context.Response.Headers.Add("Content-Security-Policy", "base-uri 'self' frame-src www.google.com; default-src 'self'; script-src 'self' www.google.com; connect-src 'self' google-anaytics.com; img-src data: 'self' www.gstatic.com; style-src 'self' fonts.googleapis.com;");
+
+        //    context.Response.Headers.Remove("X-Powered-By");
+        //    context.Response.Headers.Remove("Server");
+
+        //    await next();
+        //});
+
 
         app.MapControllerRoute(
             name: "default",
