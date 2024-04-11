@@ -7,7 +7,7 @@ using System.Diagnostics.Metrics;
 
 namespace IntexLegoSecure.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "Admin")]
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
