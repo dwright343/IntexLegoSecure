@@ -82,7 +82,7 @@ public class Program
 
             if (await userManager.FindByEmailAsync(email) == null)
             {
-                var admin = new IdentityUser
+                var admin = new ApplicationUser
                 {
                     UserName = email,
                     Email = email

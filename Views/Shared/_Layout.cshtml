@@ -50,10 +50,6 @@
                 <a  asp-area="Identity" asp-page="/Account/Login">Login</a>
             }
 
-
-
-
-
         </nav>
         <div class="icons">
             <a href="#" class="fas fa-heart"></a>
@@ -79,7 +75,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Secrets">Secrets</a>
                         </li>
-                        @if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("admin"))
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
