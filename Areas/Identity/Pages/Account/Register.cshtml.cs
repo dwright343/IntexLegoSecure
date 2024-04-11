@@ -123,6 +123,13 @@ namespace IntexLegoSecure.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    var addToRoleResult = await _userManager.AddToRoleAsync(user, "CUSTOMER");
+                    if (!addToRoleResult.Succeeded)
+                    {
+                        _logger.LogWarning("User was created but could not be added to the Customer role.");
+                        // Optionally handle the failure to add the user to the role
+                    }
+
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

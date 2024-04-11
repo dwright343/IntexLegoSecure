@@ -1,0 +1,16 @@
+﻿@*
+    This page literally MUST be named Default.cshtml because of ASP.NET convention.
+*@
+@{
+}
+
+@model IEnumerable<string>
+
+<div class="d-grid gap-2">
+    <a class="btn btn-outline-secondary" asp-controller="Home" asp-action="Index" asp-route-primaryColor="" asp-route-pageNum="">Home</a>
+
+    @foreach(string dn in Model ?? Enumerable.Empty<string>())
+        {
+        <a class="btn @(dn == ViewBag.SelectedPrimaryColor ? "btn-primary" : "btn-outline-secondary")" asp-controller="Home" asp-action="Index" asp-route-primaryColor="@dn" asp-route-pageNum="1">@dn</a>
+        }
+</div>
