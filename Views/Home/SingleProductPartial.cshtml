@@ -6,22 +6,44 @@
 }
 
 @model Product
+<link rel="stylesheet" href="~/css/Style.css" />
 
-<div class="card m-1 p-1">
-    <h4>
-        @Model.Name
-        <span class="badge rounded-pill bg-primary text-white float-end"><small>@Model.Name served</small></span>
-    </h4>
+<div>
 
-    <ul>
-        <li>Product ID: @Model.ProductId</li>
-        <li>Product Year: @Model.Year</li>
-        <li>Product Name: @Model.Name</li>
-        <li>Primary Color: @Model.PrimaryColor</li>
-    </ul>
-    <form id=@Model.ProductId method="post" asp-page="/Cart">
+    <section class="products" id="products">
+        @* <h1 class="heading">Our <span>Products</span> </h1> *@
+
+        <div class="box-container">
+
+            <div class="box">
+
+                <div class="image">
+                    <img src="~/images/lego1.jpg" />
+                    <div class="icons">
+                        <a href="#" class="cart-btn"><span class="fas fa-shopping-cart"></span></a>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>@Model.Name</h3>
+                    <div class="price">@Model.Price</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+@*     <form id=@Model.ProductId method="post" asp-page="/Cart">
         <input type="hidden" asp-for="ProductId" />
         <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
         <button type="submit" class="btn-outline-success btn-sm float-end">Donate</button>
-    </form>
+    </form> *@
 </div>
+
+
+
+
+
+
+
