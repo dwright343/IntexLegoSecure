@@ -8,25 +8,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Aurora Bricks"] - IntexStyle</title>
-    @*     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/IntexStyle.styles.css" asp-append-version="true" /> *@
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <link rel="stylesheet" href="~/css/style.css" />
 </head>
 <body>
-
     <header>
-
         <input type="checkbox" name="" id="toggler" />
         <label for="toggler" class="fas fa-bars"></label>
-
-        <a asp-area="" asp-controller="Home" asp-action="Index" class="logo">Aurora Bricks</a>
+        <a asp-area="" asp-controller="Home" asp-action="Index" class="logo">
+            <img src="~/images/logo.png" alt="" height="40" />
+            Aurora Bricks
+        </a>
 
         @await RenderSectionAsync("Scripts", required: false)
-
-
+        
         <nav class="navbar">
             <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
             <a asp-area="" asp-controller="Home" asp-action="About">About</a>
@@ -42,20 +37,13 @@
 @*                       <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                 <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
                 </form> *@
-
             }
             else
             {
                 <a  asp-area="Identity" asp-page="/Account/Login">Login</a>
             }
-
-
-
-
-
         </nav>
         <div class="icons">
-            <a href="#" class="fas fa-heart"></a>
             <a href="#" class="fas fa-home"></a>
             <a href="#" class="fas fa-shopping-cart"></a>
             <a href="#" class="fas fa-user"></a>

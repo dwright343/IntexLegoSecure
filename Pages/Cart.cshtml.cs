@@ -33,7 +33,6 @@ namespace IntexLegoSecure.Pages
                 Cart.AddItem(prod, 1); // and then add that item to the cart 
                 //HttpContext.Session.SetJson("cart", Cart);
             }
-
             return RedirectToPage(new { returnUrl = returnUrl });
         }
 

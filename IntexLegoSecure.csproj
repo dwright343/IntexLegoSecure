@@ -25,4 +25,24 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="wwwroot\Components\**" />
+    <Compile Remove="Components\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="wwwroot\Components\**" />
+    <EmbeddedResource Remove="Components\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\Components\**" />
+    <Content Remove="Components\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="wwwroot\Components\**" />
+    <None Remove="Components\**" />
+  </ItemGroup>
+
 </Project>

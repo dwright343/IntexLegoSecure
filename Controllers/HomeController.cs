@@ -21,15 +21,12 @@ namespace IntexLegoSecure.Controllers
             return View();
         }
 
-   
-
 
         private I_Repository _repo;
         public HomeController(I_Repository temp)
         {
             _repo = temp;
         }
-
 
         public IActionResult ListProducts(string? primaryColor, int pageNum = 1) // name this pageNum, because "page" means something to the .NET environment
         {

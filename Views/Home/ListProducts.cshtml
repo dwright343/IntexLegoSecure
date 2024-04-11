@@ -1,18 +1,15 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
-
 @model DefaultListViewModel
 <link rel="stylesheet" href="~/css/Style.css" />
 
 
-<h1>Aurora Bricks</h1>
-
-<h4>The things in the database should show up below:</h4>
-
-
 <h1 class="heading">Our <span>Products</span> </h1>
+
+<div class="col-3">
+    <vc:project-types/>
+</div>
 
 @foreach (Product d in Model.Products)
 {

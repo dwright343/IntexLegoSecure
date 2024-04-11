@@ -74,9 +74,19 @@ header {
         font-size: 3rem;
         color: whitesmoke;
         font-weight: bolder;
+        display: flex;
+        align-items: center;
     }
 
-    header .navbar a {
+header .logo img {
+    margin-right: 0.5rem; /* Adjust as needed to bring the image closer to the text */
+}
+
+
+
+
+
+header .navbar a {
         font-size: 2rem;
         padding: 0 1.5rem;
         color: whitesmoke;
@@ -146,8 +156,6 @@ header {
 .about {
     padding-top: 8rem; /* Adjust the top padding as needed */
 }
-
-
 
 .about .row{
     display: flex;
@@ -319,6 +327,47 @@ header {
     color:var(--orange);
     font-weight: bolder;
     padding-top: 1rem;
+}
+
+.cart {
+    padding-top: 8rem; /* Adjust the top padding as needed */
+}
+
+.cart .content {
+    padding: 2rem;
+}
+
+.cart table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cart th,
+.cart td {
+    padding: 1rem;
+    text-align: center;
+}
+
+.cart th {
+    color: black;
+    background-color: var(--orange); /* Assuming you have a variable for orange color */
+}
+
+.cart td {
+    color: #333;
+    border-bottom: 1px solid #ccc; /* Adjust border color as needed */
+}
+
+.cart .btn-primary {
+    background-color: var(--orange); /* Assuming you have a variable for orange color */
+    color: black;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+.cart .btn-primary:hover {
+    background-color: #ff6a00; /* Adjust hover color as needed */
 }
 
 footer {

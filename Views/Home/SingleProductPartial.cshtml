@@ -20,11 +20,17 @@
                 <div class="image">
                     <img src="@Model.ImgLink" />
                     <div class="icons">
-                        <form id=@Model.ProductId method="post" asp-page="/Cart">
+                        <form method="post" asp-page="/Cart" class="icons" id=@Model.ProductId>
                             <input type="hidden" asp-for="ProductId" />
                             <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
                             <a href="#" class="cart-btn"><span class="fas fa-shopping-cart"></span></a>
                         </form>
+
+                        <form method="post" asp-page-handler="AddToCart" asp-route-productId="@Model.ProductId">
+                            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                            <button type="submit" class="cart-btn"><span class="fas fa-shopping-cart"></span></button>
+                        </form>
+
                     </div>
                 </div>
                 <div class="content">
@@ -35,10 +41,6 @@
 
         </div>
     </section>
-
-
-
-
 </div>
 
 
