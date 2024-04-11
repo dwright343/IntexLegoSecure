@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace IntexLegoSecure.Models;
 
 public partial class Product
 {
+    [Key]
     public int ProductId { get; set; }
 
     public string Name { get; set; } = null!;

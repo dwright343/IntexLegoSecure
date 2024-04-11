@@ -1,3 +1,4 @@
+using IntexLegoSecure.Models;
 using IntexLegoSecure.Data;
 
 using Microsoft.AspNetCore.Identity;
@@ -17,6 +18,17 @@ public class Program
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(connectionString));
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+        builder.Services.AddScoped<I_Repository, EF_Repository>();
+
+        builder.Services.AddRazorPages();
+
+        builder.Services.AddDistributedMemoryCache();
+        builder.Services.AddSession();
+
+        builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+        builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 
         builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
             .AddRoles<IdentityRole>()
@@ -45,6 +57,8 @@ public class Program
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
+
+        app.UseSession();
 
         app.UseRouting();
 
@@ -75,6 +89,7 @@ public class Program
                 await userManager.AddToRoleAsync(admin, "ADMIN");
             }
         }
+        app.MapDefaultControllerRoute();
 
         app.Run();
     }
