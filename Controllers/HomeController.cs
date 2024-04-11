@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace IntexLegoSecure.Controllers
 {
-    [Authorize]
+
     public class HomeController : Controller
     {
         //private readonly ILogger<HomeController> _logger;
@@ -16,13 +16,12 @@ namespace IntexLegoSecure.Controllers
         //    _logger = logger;
         //}
 
-        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
 
-        [Authorize(Roles = "Admin")]
+   
         public IActionResult Products()
         {
             return View();

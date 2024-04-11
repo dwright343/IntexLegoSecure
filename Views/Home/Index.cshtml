@@ -15,65 +15,6 @@
 
 </section>
 
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Cookie Notification</title>
-    <style>
-        .cookie-notification {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            transform: translateX(-100%);
-            background-color: #f8f8f8;
-            padding: 10px;
-            text-align: center;
-            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-            z-index: 9999;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .cookie-notification.show {
-            transform: translateX(0);
-        }
-
-        .cookie-notification p {
-            margin: 0;
-        }
-
-        .cookie-notification button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-    <div class="cookie-notification">
-        <p>This website uses cookies to ensure you get the best experience on our website.</p>
-        <button onclick="acceptCookies()">Accept</button>
-    </div>
-
-    <script>
-        function acceptCookies() {
-            // You can add your logic here to handle the acceptance of cookies
-            // For now, we will simply hide the notification and enable the rest of the website
-            document.querySelector('.cookie-notification').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-        
-        // Disable scrolling until cookies are accepted
-        document.body.style.overflow = 'hidden';
-    </script>
-</body>
-</html>
 <section class="products" id="products">
 
     <h1 class="heading">Best <span>Sellers</span> </h1>
@@ -121,7 +62,7 @@
     </div>
 </section>
 
-@* icons at the bottom of page*@
+@* icons at the bottom of page*@ 
 <section class="icons-container">
 
     <div class="icons">
@@ -149,3 +90,47 @@
     </div>
 
 </section>
+
+<div class="cookie-notification">
+    <div class="cookie-content">
+        <p>This website uses cookies to ensure you get the best experience on our website.</p>
+        <button class="accept-btn" onclick="hideNotification()">Accept</button>
+    </div>
+</div>
+
+<style>
+    .cookie-notification {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #f8f8f8;
+        padding: 20px;
+        z-index: 9999;
+    }
+
+    .cookie-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .cookie-content p {
+        margin: 0;
+    }
+
+    .accept-btn {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    function hideNotification() {
+        var notification = document.querySelector('.cookie-notification');
+        notification.style.display = 'none';
+    }
+</script>
