@@ -1,7 +1,8 @@
 using IntexLegoSecure.Data;
-
+using IntexLegoSecure.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 //using IntexLegoSecure.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,9 +16,25 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+
+// Identity services
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+services.AddScoped<UserManager<ApplicationUser>>();
+
+
+// Configure your authentication cookie settings here if needed
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    // Configure cookie settings here
+});
+
+
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddRazorPages();
 
 //Google Authentication
 services.AddAuthentication().AddGoogle(googleOptions =>
