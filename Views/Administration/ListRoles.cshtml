@@ -1,5 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity;
-@model IEnumerable<IdentityRole>
+﻿@model IEnumerable<IdentityRole>
 
 @{
     ViewData["Title"] = "All Roles";
@@ -9,7 +8,7 @@
 
 @if(Model.Any())
 {
-    <a class="btn btn-primary" style="width:auto" asp-controller="admin" asp-action="CreateRole">
+    <a class="btn btn-primary" style="width:auto" asp-controller="Administration" asp-action="CreateRole">
         Create Role
     </a>
 
@@ -24,8 +23,8 @@
             </div>
             <div class="card-footer">
                 <a class="btn btn-primary" asp-action="EditRole" 
-                    asp-controller="admin" asp-route-id="@role.Id">Edit</a>
-                <a href="#" class="btn btn-primary">Delete</a>
+                    asp-controller="Administration" asp-route-id="@role.Id">Edit</a>
+                @* <a href="#" class="btn btn-primary">Delete</a>  *@
             </div>
         </div>
     }
@@ -40,7 +39,7 @@ else
             <h5 class="card-title">
                 Use the button below to create a role
             </h5>
-            <a class="btn btn-primary" style="width:auto" asp-controller="admin" asp-action="CreateRole">
+            <a class="btn btn-primary" style="width:auto" asp-controller="Administration" asp-action="CreateRole">
                 Create Role
             </a>
         </div>
