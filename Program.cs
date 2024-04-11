@@ -40,7 +40,7 @@ public class Program
         builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
         builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-        builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+        builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
         builder.Services.AddControllersWithViews();
@@ -52,11 +52,10 @@ public class Program
         //    googleOptions.ClientSecret = googleClientSecret;
         //});
 
-        builder.Services.AddAuthentication().AddGoogle(googleOptions =>
-        services.AddScoped<UserManager<ApplicationUser>>();
+        builder.Services.AddScoped<UserManager<ApplicationUser>>();
 
         //Google Authentication
-        services.AddAuthentication().AddGoogle(googleOptions =>
+        builder.Services.AddAuthentication().AddGoogle(googleOptions =>
         {
             googleOptions.ClientId = builder.Configuration["Authentication:Google:ClientId"];
             googleOptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
