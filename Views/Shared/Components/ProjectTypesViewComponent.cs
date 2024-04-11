@@ -13,10 +13,10 @@ public class ProjectTypesViewComponent : ViewComponent
     }
     public string Invoke()
     {
-        var LegoTypes = _repo.Products
+        var legoTypes = _repo.Products
             .Select(x => x.Category)
             .Distinct()
             .OrderBy(x => x);
-        return ("This worked");
+        return ("");
     }
 }
