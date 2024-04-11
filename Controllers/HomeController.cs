@@ -22,10 +22,7 @@ namespace IntexLegoSecure.Controllers
         }
 
    
-        public IActionResult Products()
-        {
-            return View();
-        }
+
 
         private I_Repository _repo;
         public HomeController(I_Repository temp)
