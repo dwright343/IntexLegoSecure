@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using IntexLegoSecure.ViewModels;
-using IntexLegoSecure.Models.ViewModels;
+
 
 namespace IntexLegoSecure.Controllers
 {
