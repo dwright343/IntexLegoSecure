@@ -1,4 +1,8 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -15,52 +19,127 @@
 
 </section>
 
-<section class="products" id="products">
 
-    <h1 class="heading">Best <span>Sellers</span> </h1>
+@if (SignInManager.IsSignedIn(User))
+{
 
-    <div class="box-container">
+    <section class="products" id="products">
 
-        <div class="box">
-            <div class="image">
-                <img src="~/images/lego1.jpg" />
-                <div class="icons">
-                    <a href="#" class="cart-btn"><span class="fas fa-shopping-cart"></span></a>
+        <h1 class="heading">Best <span>Sellers</span> </h1>
+
+        <div class="box-container">
+
+            <div class="box">
+                <div class="image">
+                    <img src="~/images/lego1.jpg" />
+                    <div class="icons">
+                        <a href="#" class="cart-btn"><span class="fas fa-shopping-cart"></span></a>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>Lego Set 1</h3>
+                    <div class="price">$70.99</div>
                 </div>
             </div>
-            <div class="content">
-                <h3>Lego Set 1</h3>
-                <div class="price">$70.99</div>
-            </div>
-        </div>
 
-        <div class="box">
-            <div class="image">
-                <img src="~/images/lego1.jpg" />
-                <div class="icons">
-                    <a href="#" class="cart-btn"><span class="fas fa-shopping-cart"></span></a>
+            <div class="box">
+                <div class="image">
+                    <img src="~/images/lego1.jpg" />
+                    <div class="icons">
+                        <a href="#" class="cart-btn"><span class="fas fa-shopping-cart"></span></a>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>Lego Set 1</h3>
+                    <div class="price">$70.99</div>
                 </div>
             </div>
-            <div class="content">
-                <h3>Lego Set 1</h3>
-                <div class="price">$70.99</div>
-            </div>
-        </div>
 
-        <div class="box">
-            <div class="image">
-                <img src="~/images/lego1.jpg" />
-                <div class="icons">
-                    <a href="#" class="cart-btn"><span class="fas fa-shopping-cart"></span></a>
+            <div class="box">
+                <div class="image">
+                    <img src="~/images/lego1.jpg" />
+                    <div class="icons">
+                        <a href="#" class="cart-btn"><span class="fas fa-shopping-cart"></span></a>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>Lego Set 1</h3>
+                    <div class="price">$70.99</div>
                 </div>
             </div>
-            <div class="content">
-                <h3>Lego Set 1</h3>
-                <div class="price">$70.99</div>
+        </div>
+    </section>
+}
+
+
+
+
+
+
+
+
+else
+{
+    <section class="products" id="products">
+
+        <h1 class="heading">Best <span>Sellers</span> </h1>
+
+        <div class="box-container">
+
+            <div class="box">
+                <div class="image">
+                    <img src="~/images/lego1.jpg" />
+                    <div class="icons">
+                        <a href="#" class="cart-btn"><span class="fas fa-shopping-cart"></span></a>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>Lego Set 1</h3>
+                    <div class="price">$70.99</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="image">
+                    <img src="~/images/lego1.jpg" />
+                    <div class="icons">
+                        <a href="#" class="cart-btn"><span class="fas fa-shopping-cart"></span></a>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>Lego Set 1</h3>
+                    <div class="price">$70.99</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="image">
+                    <img src="~/images/lego1.jpg" />
+                    <div class="icons">
+                        <a href="#" class="cart-btn"><span class="fas fa-shopping-cart"></span></a>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>Lego Set 1</h3>
+                    <div class="price">$70.99</div>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @* icons at the bottom of page*@ 
 <section class="icons-container">

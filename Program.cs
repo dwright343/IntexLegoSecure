@@ -94,14 +94,14 @@ public class Program
         app.MapRazorPages();
 
 
-        //app.Use(async (context, next) =>
-        //{
-        //    context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
-        //    context.Response.Headers.Add("X-XSS-Protection", "1; mode=block");
-        //    context.Response.Headers.Add("Referrer-Policy", "no-referrer");
-        //    context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; img-src 'self' data: m.media-amazon.com images.brickset.com www.brickeconomy.com *.amazonaws.com *.lego.com; script-src 'self' www.google.com app.termly.io; style-src 'self' 'unsafe-inline'; object-src 'none'");
-        //    await next();
-        //});
+        app.Use(async (context, next) =>
+        {
+            context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
+            context.Response.Headers.Add("X-XSS-Protection", "1; mode=block");
+            context.Response.Headers.Add("Referrer-Policy", "no-referrer");
+            context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; img-src 'self' data: m.media-amazon.com images.brickset.com www.brickeconomy.com www.cloudflare.com *.amazonaws.com *.lego.com; script-src 'self' www.google.com app.termly.io; style-src 'self' 'unsafe-inline'; object-src 'none'");
+            await next();
+        });
 
 
 
