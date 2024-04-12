@@ -18,7 +18,10 @@ ViewData["Title"] = "Home Page";
 
 @foreach (Product product in Model.Products)
 {
-<partial name="SingleProductPartial" model="product" />
+    <!-- Make each product clickable -->
+    <a href="@Url.Action("DetailedProduct", "Home", new { id = product.ProductId })">
+        <partial name="SingleProductPartial" model="product" />
+    </a>
 }
 
 <div page-model="@Model.PaginationInfo" page-action="ListProducts" page-classes-enabled="true" page-class="btn"
