@@ -15,6 +15,9 @@ public class Program
 
     public static async Task Main(string[] args)
     {
+
+
+
         var builder = WebApplication.CreateBuilder(args);
 
         //Initialize Key Vault Client
@@ -41,6 +44,8 @@ public class Program
         }
         
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+
 
         builder.Services.AddScoped<I_Repository, EF_Repository>();
 
@@ -73,7 +78,16 @@ public class Program
             googleOptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
         });
 
-
+        //builder.Services.Configure<IdentityOptions>(options =>
+        //{
+        //    // Default Password settings.
+        //    options.Password.RequireDigit = true;
+        //    options.Password.RequireLowercase = true;
+        //    options.Password.RequireNonAlphanumeric = true;
+        //    options.Password.RequireUppercase = true;
+        //    options.Password.RequiredLength = 10;
+        //    options.Password.RequiredUniqueChars = 1;
+        //});
 
 
         var app = builder.Build();
@@ -104,6 +118,7 @@ public class Program
             pattern: "{controller=Home}/{action=Index}/{id?}");
         app.MapRazorPages();
 
+    
 
         app.Use(async (context, next) =>
         {
