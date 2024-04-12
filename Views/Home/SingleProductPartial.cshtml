@@ -25,13 +25,13 @@
                             <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
                             <a href="#" class="cart-btn"><span class="fas fa-shopping-cart"></span></a>
                         </form> *@
-@*                         <form id=@Model.ProductId method="post" asp-page="/Cart">
+@*                          <form id=@Model.ProductId method="post" asp-page="/Cart">
                             
                             <div class="icons"><input type="hidden" asp-for="ProductId" />
                             <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
                             <a class="cart-btn">
                                 <span class="fas fa-shopping-cart"></span<button type="submit" class="cart-btn">Add to cart</button></a>
-                        </form> *@
+                        </form> 
                         <form id="@Model.ProductId" method="post" asp-page="/Cart">
                             <div class="icons">
                                 <input type="hidden" asp-for="ProductId" />
@@ -43,6 +43,10 @@
                                 </a>
                             </div>
                         </form>
+                        <button type="submit" form="@Model.ProductId" class="cart-btn fas fa-shopping-cart">
+                            <span>Add to cart</span> *@
+</button>
+
                     </div>
                 </div>
                 <div class="content">

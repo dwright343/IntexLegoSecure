@@ -24,6 +24,18 @@
                 <p><strong>Secondary Color:</strong> @Model.SecondaryColor</p>
                 <p><strong>Category:</strong> @Model.Category</p>
                 <p><strong>Description:</strong> @Model.Description</p>
+                <form id="@Model.ProductId" method="post" asp-page="/Cart">
+                    <div class="icons">
+                        <input type="hidden" asp-for="ProductId" />
+                        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+
+                        <!-- Using a button for form submission -->
+                        <button type="submit" class="cart-btn fas fa-shopping-cart">
+                            <span>Add to cart</span>
+                        </button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>

@@ -45,7 +45,7 @@ namespace IntexLegoSecure.Controllers
                 productsQuery = productsQuery.Where(p => p.Category.Contains(filter));
             }
 
-            var PageInfo = new DefaultListViewModel
+            var PageInfo = new ProductListViewModel
             {
                 Products = productsQuery
                             .OrderBy(x => x.ProductId)
