@@ -30,29 +30,43 @@ namespace IntexLegoSecure.Controllers
             _repo = temp;
         }
 
-        public IActionResult ListProducts(string? primaryColor, int pageNum = 1) // name this pageNum, because "page" means something to the .NET environment
+        public IActionResult ListProducts(string? category, int pageNum = 1)
         {
             int pageSize = 5;
+
+            // Fetch distinct categories from your products
+            var categories = _repo.Products.Select(p => p.Category).Distinct().ToList();
+
+            // Filter products based on the selected category
+            IQueryable<Product> productsQuery = _repo.Products.AsQueryable(); // Convert to IQueryable
+
+            if (!string.IsNullOrEmpty(category))
+            {
+                productsQuery = productsQuery.Where(p => p.Category == category);
+            }
+
             var PageInfo = new DefaultListViewModel
             {
-                Products = _repo.Products
-                .Where(x => x.PrimaryColor == primaryColor || primaryColor == null)
-                .OrderBy(x => x.ProductId)
-                .Skip((pageNum - 1) * pageSize)
-                .Take(pageSize),
+                Categories = categories,
+                Products = productsQuery
+                    .OrderBy(x => x.ProductId)
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize),
 
                 PaginationInfo = new PaginationInfo
                 {
                     CurrentPage = pageNum,
                     ItemsPerPage = pageSize,
-                    TotalItems = primaryColor == null ? _repo.Products.Count() : _repo.Products.Where(x => x.PrimaryColor == primaryColor).Count()
-                },
-
-                CurrentPrimaryColor = primaryColor
+                    TotalItems = string.IsNullOrEmpty(category) ? _repo.Products.Count() : productsQuery.Count()
+                }
             };
 
             return View(PageInfo);
         }
+
+
+
+
 
         [Authorize(Roles = "Admin")]
         public IActionResult Privacy()

@@ -7,14 +7,21 @@
 
 <h1 class="heading">Our <span>Products</span> </h1>
 
-<div class="col-3">
-    <vc:project-types/>
+
+<div class="category-buttons">
+    @foreach(var category in Model.Categories)
+    {
+    <a href="@Url.Action("ListProducts", "Home", new { category = category })" class="category-button" style="background-color: #ff6a00; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 1.2rem; cursor: pointer; transition: background-color 0.3s ease;">@category</a>
+    }
 </div>
+
 
 @foreach (Product d in Model.Products)
 {
     <partial name="SingleProductPartial" model="d" />
 }
+
+
 
 @* <a asp-controller="Home" asp-action="Index" asp-route-pageNum="1">1</a>
 <a asp-controller="Home" asp-action="Index" asp-route-pageNum="2">2</a>
