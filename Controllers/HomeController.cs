@@ -106,11 +106,11 @@ namespace IntexLegoSecure.Controllers
 
             if (Fraud == 0)
             {
-                return View();
+                return View("OrderConfirmation");
             }
             else
             {
-                return View();
+                return View("OrderReview");
             }
             
         }
