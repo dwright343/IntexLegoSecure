@@ -63,6 +63,20 @@ namespace IntexLegoSecure.Controllers
 
             return View(PageInfo);
         }
+        
+        public IActionResult DetailedProduct(int id)
+        {
+            // Retrieve the product from the database based on the provided id
+            var product = _repo.Products.FirstOrDefault(p => p.ProductId == id);
+    
+            if (product == null)
+            {
+                return NotFound(); // Or handle the case where the product is not found
+            }
+    
+            return View(product); // Pass the product to the DetailedProduct view
+        }
+
 
 
 

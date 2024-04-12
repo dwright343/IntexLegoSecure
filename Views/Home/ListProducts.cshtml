@@ -1,9 +1,8 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+ViewData["Title"] = "Home Page";
 }
 @model DefaultListViewModel
 <link rel="stylesheet" href="~/css/Style.css" />
-
 
 <h1 class="heading">Our <span>Products</span> </h1>
 
@@ -59,10 +58,12 @@
 </form>
 
 
-
-@foreach (Product d in Model.Products)
+@foreach (Product product in Model.Products)
 {
-    <partial name="SingleProductPartial" model="d" />
+    <!-- Make each product clickable -->
+    <a href="@Url.Action("DetailedProduct", "Home", new { id = product.ProductId })">
+        <partial name="SingleProductPartial" model="product" />
+    </a>
 }
 
 
@@ -76,3 +77,13 @@
 <div style="text-align: center; margin-top: 20px;" page-model="@Model.PaginationInfo" page-action="ListProducts" page-classes-enabled="true" page-class="btn"
      page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
      page-url-Name="@Model.CurrentPrimaryColor" class="btn-group pull-right m-1"></div>
+
+<script>
+    function redirectToCategory(category) {
+        var url = '@Url.Action("ListProducts", "Home")';
+        if (category) {
+            url += '?category=' + encodeURIComponent(category);
+        }
+        window.location.href = url;
+    }
+</script>

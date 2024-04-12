@@ -12,7 +12,6 @@
 
     <section class="products" id="products">
         @* <h1 class="heading">Our <span>Products</span> </h1> *@
-
         <div class="box-container">
 
             <div class="box">
@@ -20,17 +19,14 @@
                 <div class="image">
                     <img src="@Model.ImgLink" />
                     <div class="icons">
-                        <form method="post" asp-page="/Cart" class="icons" id=@Model.ProductId>
-                            <input type="hidden" asp-for="ProductId" />
-                            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-                            <a href="#" class="cart-btn"><span class="fas fa-shopping-cart"></span></a>
-                        </form>
 
                         <form method="post" asp-page-handler="AddToCart" asp-route-productId="@Model.ProductId">
                             <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-                            <button type="submit" class="cart-btn"><span class="fas fa-shopping-cart"></span></button>
+                            <div class="icons">
+                                <a class="cart-btn"><span class="fas fa-shopping-cart"></span>
+                                <button type="submit" class="cart-btn"></button></a>
+                            </div>
                         </form>
-
                     </div>
                 </div>
                 <div class="content">
@@ -38,12 +34,9 @@
                     <div class="price">@Model.Price</div>
                 </div>
             </div>
-
         </div>
     </section>
 </div>
-
-
 
 
 
