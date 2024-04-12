@@ -26,4 +26,12 @@ public partial class Product
     public string Description { get; set; } = null!;
 
     public string Category { get; set; } = null!;
+
+    public string recName1 { get; set; }
+
+    public string recName2 { get; set; }
+    public string recName3 { get; set; }
+    public int recId1 { get; set; }
+    public int recId2 { get; set; }
+    public int recId3 { get; set; }
 }

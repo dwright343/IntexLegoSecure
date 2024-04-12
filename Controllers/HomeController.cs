@@ -120,7 +120,6 @@ namespace IntexLegoSecure.Controllers
 
 
 
-
         [Authorize]
         public IActionResult Secrets()
         {
