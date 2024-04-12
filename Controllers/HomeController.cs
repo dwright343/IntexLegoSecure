@@ -116,7 +116,7 @@ namespace IntexLegoSecure.Controllers
             return View(PageInfo);
         }
 
-
+        [Authorize]
         public IActionResult OrderConfirmation()
         {
             return View();
