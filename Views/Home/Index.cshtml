@@ -75,7 +75,7 @@
 else
 {
     <section class="products" id="products">
-        <h1 class="heading">Best <span>Sellers</span> </h1>
+        <h1 class="heading">Most <span>Popular</span> </h1>
         <div class="box-container">
             @foreach (var product in Model)
             {
@@ -83,30 +83,18 @@ else
                     <div class="image">
                         <img src="@product.ImgLink" />
                         <div class="icons">
-                            <a href="#" class="cart-btn"><span class="fas fa-shopping-cart"></span></a>
+                            <a href="#" class="cart-btn"><span class="fas fa-shopping-cart">Add to cart</span></a>
                         </div>
                     </div>
                     <div class="content">
                         <h3>@product.Name</h3>
-                        <div class="price">@product.Price</div>
+                        <div class="price">$ @product.Price</div>
                     </div>
                 </div>
             }
         </div>
     </section>
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 @* icons at the bottom of page*@ 
@@ -181,3 +169,37 @@ else
         notification.style.display = 'none';
     }
 </script>
+
+<style>
+    .box-container {
+        display: flex; /* Use flexbox */
+        flex-wrap: wrap; /* Allow items to wrap */
+        justify-content: space-between; /* Distribute items evenly with space between them */
+    }
+
+    .box {
+        width: calc(33.33% - 20px); /* Adjust the width of each box to fit three boxes per row */
+        margin-bottom: 20px; /* Add some space between each box */
+    }
+
+    /* Adjust as needed based on your design */
+    .box .image {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .box .image img {
+        width: 100%;
+        height: auto;
+    }
+
+    .box .content {
+        padding: 10px;
+        background-color: #f9f9f9;
+    }
+
+    .box .content h3 {
+        margin-top: 0;
+    }
+    
+</style>
