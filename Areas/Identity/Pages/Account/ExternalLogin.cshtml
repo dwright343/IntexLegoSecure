@@ -4,30 +4,83 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>@ViewData["Title"]</h1>
-<h2 id="external-login-title">Associate your @Model.ProviderDisplayName account.</h2>
-<hr />
-
-<p id="external-login-description" class="text-info">
-    You've successfully authenticated with <strong>@Model.ProviderDisplayName</strong>.
-    Please enter an email address for this site below and click the Register button to finish
-    logging in.
-</p>
-
-<div class="row">
-    <div class="col-md-4">
-        <form asp-page-handler="Confirmation" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control" autocomplete="email" placeholder="Please enter your email."/>
-                <label asp-for="Input.Email" class="form-label"></label>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <button type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
-        </form>
-    </div>
-</div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+@{
+Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<section class="about">
+    <h1 class="heading">@ViewData["Title"]</h1>
+    <h2 id="external-login-title">Associate your @Model.ProviderDisplayName account.</h2>
+    <hr />
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mt-5 custom-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Complete Registration</h5>
+                        <p class="card-text text-info">You've successfully authenticated with <strong>@Model.ProviderDisplayName</strong>. Please enter an email address for this site below and click the Register button to finish logging in.</p>
+                        <form asp-page-handler="Confirmation" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="Input.Email" class="form-control" autocomplete="email" placeholder="Please enter your email."/>
+                                <label asp-for="Input.Email">Email address</label>
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+                            <button type="submit" class="w-100 btn btn-lg btn-primary custom-btn">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
+</section>
+
+<style>
+    .custom-card {
+        background-color: #f8f9fa; /* Light gray background */
+        border: 1px solid #dee2e6; /* Light gray border */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    }
+
+    .custom-card .card-body {
+        padding: 30px;
+    }
+
+    .custom-card .card-title {
+        font-size: 1.25rem; /* Larger title font size */
+        color: #333; /* Darker text color */
+    }
+
+    .custom-card .form-floating input {
+        border-radius: 8px; /* Rounded input field */
+    }
+
+    .custom-card .form-floating label {
+        color: #666; /* Lighter label color */
+    }
+
+    .custom-card .btn-primary {
+        background-color: #ff6a00; /* Primary button color */
+        border-color: #ff6a00; /* Primary button border color */
+    }
+
+    .custom-card .btn-primary:hover {
+        background-color: #0056b3; /* Darker hover color */
+        border-color: #0056b3; /* Darker hover border color */
+    }
+
+    .custom-card .text-info {
+        color: #17a2b8; /* Info text color */
+    }
+
+    .custom-card .text-danger {
+        color: #dc3545; /* Danger text color */
+    }
+
+</style>
