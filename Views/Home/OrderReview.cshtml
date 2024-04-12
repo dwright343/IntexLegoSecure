@@ -1,28 +1,19 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
-
+﻿@using Microsoft.CodeAnalysis.Classification
 @model IntexLegoSecure.ViewModels.FraudRoleViewModel
 
-@{
+@{ 
     ViewData["Title"] = "Order Review";
 }
+@{
+    
+Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/css/style.css" />
 
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+<h1 class="heading">@ViewData["Title"]</h1>
 
-<h1>@ViewData["Title"]</h1>
 
-<div>
+<div class="custom-dropdown">
     <label for="fraudFilter">Fraud:</label>
     <select id="fraudFilter" onchange="applyFilter()">
         <option value="">All</option>
@@ -33,39 +24,39 @@
 
 <table>
     <thead>
-        <tr>
-            <th>Customer ID</th>
-            <th>Date</th>
-            <th>Day of Week</th>
-            <th>Time</th>
-            <th>Entry Mode</th>
-            <th>Amount</th>
-            <th>Transaction Type</th>
-            <th>Transaction Country</th>
-            <th>Shipping Country</th>
-            <th>Bank</th>
-            <th>Card Type</th>
-            <th>Fraud</th>
-        </tr>
+    <tr>
+        <th>Customer ID</th>
+        <th>Date</th>
+        <th>Day of Week</th>
+        <th>Time</th>
+        <th>Entry Mode</th>
+        <th>Amount</th>
+        <th>Transaction Type</th>
+        <th>Transaction Country</th>
+        <th>Shipping Country</th>
+        <th>Bank</th>
+        <th>Card Type</th>
+        <th>Fraud</th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (Order c in Model.Orders)
-        {
-            <tr class="fraud-@c.Fraud">
-                <td>@c.CustomerId</td>
-                <td>@c.Date</td>
-                <td>@c.DayOfWeek</td>
-                <td>@c.Time</td>
-                <td>@c.EntryMode</td>
-                <td>@c.Amount</td>
-                <td>@c.TransactionType</td>
-                <td>@c.TransactionCountry</td>
-                <td>@c.ShippingCountry</td>
-                <td>@c.Bank</td>
-                <td>@c.CardType</td>
-                <td>@c.Fraud</td>
-            </tr>
-        }
+    @foreach (Order c in Model.Orders)
+    {
+    <tr class="fraud-@c.Fraud">
+        <td>@c.CustomerId</td>
+        <td>@c.Date</td>
+        <td>@c.DayOfWeek</td>
+        <td>@c.Time</td>
+        <td>@c.EntryMode</td>
+        <td>@c.Amount</td>
+        <td>@c.TransactionType</td>
+        <td>@c.TransactionCountry</td>
+        <td>@c.ShippingCountry</td>
+        <td>@c.Bank</td>
+        <td>@c.CardType</td>
+        <td>@c.Fraud</td>
+    </tr>
+    }
     </tbody>
 </table>
 
@@ -100,17 +91,117 @@
      </div>
 
 
-            @*<div>
-                @if (Model.CurrentPage > 1)
-                {
-                    <a href="@Url.Action("Orders", new { page = Model.CurrentPage - 1 })">Previous</a>
-                }
 
-                @if (Model.CurrentPage < Model.TotalPages)
-                {
-                    <a href="@Url.Action("Orders", new { page = Model.CurrentPage + 1 })">Next</a>
-                }
-            </div>*@
+<style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px; /* Adjust margin as needed */
+    }
 
+    /* Custom dropdown styles */
+    .custom-dropdown {
+        width: 200px; /* Adjust as needed */
+    }
+
+    .custom-dropdown select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        appearance: none; /* Removes default arrow icon */
+    }
+
+    .custom-dropdown select::-ms-expand {
+        display: none; /* Hides arrow icon in IE */
+    }
+
+    /* Style the label */
+    .custom-dropdown label {
+        margin-right: 8px;
+        font-size: 16px; /* Adjust label font size */
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .fraud-1 {
+        background-color: #ffcccc; /* Light red for fraudulent */
+    }
+
+    .fraud-0 {
+        background-color: #ffc8a1; /* Light green for not fraudulent */
+    }
+
+    #fraudFilter, #fraudFilter option {
+        font-size: 14px;
+    }
+
+    <style>
+         /* Custom dropdown styles */
+     .custom-dropdown {
+         position: relative;
+         display: inline-block;
+         width: 200px; /* Adjust as needed */
+     }
+
+    .custom-dropdown select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        appearance: none; /* Removes default arrow icon */
+    }
+
+    .custom-dropdown select::-ms-expand {
+        display: none; /* Hides arrow icon in IE */
+    }
+
+    /* Style the label */
+    .custom-dropdown label {
+        margin-right: 8px;
+        font-size: 16px; /* Adjust label font size */
+    }
+
+    /* Style the table */
+    table {
+        width: 95%; /* Adjust table width as needed */
+        margin: 0 auto; /* Center the table */
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
 
        
