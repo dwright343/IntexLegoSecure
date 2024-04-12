@@ -4,6 +4,7 @@
     ViewBag.Title = "Edit User";
 }
 
+<section class="about">
 <h1>Edit User</h1>
 
 <form method="post" class="mt-3">
@@ -84,14 +85,14 @@
                 <h5 class="card-title">None at the moment</h5>
             }
         </div>
-@*         <div class="card-footer">
+        @*         <div class="card-footer">
             <a href="#" style="width:auto" class="btn btn-primary">
                 Manage Roles
             </a>
         </div> *@
     </div>
 
-@*     <div class="card mt-3">
+    @*     <div class="card mt-3">
         <div class="card-header">
             <h3>User Claims</h3>
         </div>
@@ -115,3 +116,83 @@
         </div>
     </div> *@
 </form>
+</section>
+
+<style>
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .col-form-label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .text-danger {
+        color: red;
+    }
+
+    .btn {
+        display: inline-block;
+        font-weight: bold;
+        color: #fff;
+        text-align: center;
+        vertical-align: middle;
+        user-select: none;
+        background-color: #007bff;
+        border: 1px solid transparent;
+        padding: 10px 20px;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: 5px;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    .btn:hover {
+        color: #fff;
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+    .card {
+        margin-top: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        padding: 15px;
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #dee2e6;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        margin-bottom: 10px;
+    }
+
+    .btn-primary {
+        background-color: #ff6a00;
+        border-color: #ff6a00;
+    }
+
+    .btn-primary:hover {
+        background-color: #ff8c33;
+        border-color: #ff8c33;
+    }
+</style>
+
