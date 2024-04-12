@@ -58,11 +58,15 @@
 
             @if (SignInManager.IsSignedIn(User))
             {
-
-                <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" style="display: none;">
-                    <a>Logout</a>
-                </form>
-                <a href="javascript:void(0);" onclick="document.getElementById('logoutForm').submit();">Logout</a>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Account</a>
+                </li>
+                <div class="nav-item">
+                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                    </form>
+                </div>
+             
                     
 @*                       <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                 <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
@@ -72,7 +76,8 @@
             {
                 <a  asp-area="Identity" asp-page="/Account/Login">Login</a>
             }
-        </nav>
+@*             <partial name="_LoginPartial" />
+ *@        </nav>
         <div class="icons">
             <a href="#" class="fas fa-home"></a>
             <a href="#" class="fas fa-shopping-cart"></a>

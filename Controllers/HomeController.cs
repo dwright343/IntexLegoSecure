@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using IntexLegoSecure.ViewModels;
+using IntexLegoSecure.Models.ViewModels;
 
 
 namespace IntexLegoSecure.Controllers
@@ -51,7 +52,7 @@ namespace IntexLegoSecure.Controllers
                 productsQuery = productsQuery.Where(p => p.Category.Contains(filter));
             }
 
-            var PageInfo = new DefaultListViewModel
+            var PageInfo = new ProductListViewModel
             {
                 Products = productsQuery
                             .OrderBy(x => x.ProductId)
@@ -139,7 +140,7 @@ namespace IntexLegoSecure.Controllers
         //public IActionResult AdminOrders(int? fraud, int pageNum = 1) // we will want to pass in the fradulent bool here so that we can filter.
         //{
         //    int pageSize = 5;
-        //    var PageInfo = new DefaultListViewModel
+        //    var PageInfo = new ProductListViewModel
         //    {
         //        Products = _repo.Products
         //        .Where(x => x.PrimaryColor == primaryColor || primaryColor == null)

@@ -1,7 +1,10 @@
-﻿@{
+﻿@using IntexLegoSecure.Models
+
+
+@{
 ViewData["Title"] = "Home Page";
 }
-@model DefaultListViewModel
+@model ProductListViewModel
 <link rel="stylesheet" href="~/css/Style.css" />
 
 <h1 class="heading">Our <span>Products</span> </h1>
@@ -78,12 +81,3 @@ ViewData["Title"] = "Home Page";
      page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
      page-url-Name="@Model.CurrentPrimaryColor" class="btn-group pull-right m-1"></div>
 
-<script>
-    function redirectToCategory(category) {
-        var url = '@Url.Action("ListProducts", "Home")';
-        if (category) {
-            url += '?category=' + encodeURIComponent(category);
-        }
-        window.location.href = url;
-    }
-</script>
