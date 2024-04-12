@@ -40,92 +40,100 @@ namespace IntexLegoSecure.Controllers
         {
             _repo = temp;
 
-            _session = new InferenceSession("C:\\Users\\dayis\\source\\repos\\IntexLegoSecure\\model.onnx");
+            _session = new InferenceSession("Models/model.onnx");
+        }
+
+        // HomeController.cs
+
+
+        // HomeController.cs
+        public IActionResult PrepareOrder()
+        {
+            // Assuming retrieval of cart details is necessary, simulate here
+            Order newOrder = new Order
+            {
+                CustomerId = 1,
+                Time = DateTime.Now.Hour * 100 + DateTime.Now.Minute, // HHMM format
+                Amount = 200,
+                DayOfWeek = DateTime.Now.DayOfWeek.ToString(),
+                EntryMode = "PIN",
+                TransactionType = "Online",
+                TransactionCountry = "USA",
+                ShippingCountry = "USA",
+                Bank = "HSBC",
+                CardType = "Visa"
+            };
+
+            // Forward to PredictFraud to check if the order is fraudulent
+            return PredictFraud(newOrder);
         }
 
 
-
-        public IActionResult PredictFraud(Order newOrder)
+        // HomeController.cs
+        public IActionResult PredictFraud(Order order)
         {
+            // Create a list to hold input data
+            var inputData = new List<float>
+    {
+        order.Time ?? 0, // Ensure these are non-nullable or have fallbacks
+        order.Amount ?? 0,
+        DateTime.Now.Year, // Assuming you use the current date, adapt as necessary
+        DateTime.Now.Month,
+        DateTime.Now.Day,
+        order.DayOfWeek == "Mon" ? 1 : 0,
+        order.DayOfWeek == "Sat" ? 1 : 0,
+        order.DayOfWeek == "Sun" ? 1 : 0,
+        order.DayOfWeek == "Thu" ? 1 : 0,
+        order.DayOfWeek == "Tue" ? 1 : 0,
+        order.DayOfWeek == "Wed" ? 1 : 0,
+        order.EntryMode == "PIN" ? 1 : 0,
+        order.EntryMode == "Tap" ? 1 : 0,
+        order.TransactionType == "Online" ? 1 : 0,
+        order.TransactionType == "POS" ? 1 : 0,
+        order.TransactionCountry == "India" ? 1 : 0,
+        order.TransactionCountry == "Russia" ? 1 : 0,
+        order.TransactionCountry == "USA" ? 1 : 0,
+        order.TransactionCountry == "United Kingdom" ? 1 : 0,
+        order.ShippingCountry == "India" ? 1 : 0,
+        order.ShippingCountry == "Russia" ? 1 : 0,
+        order.ShippingCountry == "USA" ? 1 : 0,
+        order.ShippingCountry == "United Kingdom" ? 1 : 0,
+        order.Bank == "HSBC" ? 1 : 0,
+        order.Bank == "Halifax" ? 1 : 0,
+        order.Bank == "Lloyds" ? 1 : 0,
+        order.Bank == "Metro" ? 1 : 0,
+        order.Bank == "Monzo" ? 1 : 0,
+        order.Bank == "RBS" ? 1 : 0,
+        order.CardType == "Visa" ? 1 : 0
+    };
 
-            //var record = new Order()
-            //{
-            //     = _repo.Orders
-            //    .Where(x => x.customer_ID == 500)
-            //};
-            //newOrder = _repo.Orders
-            //    .Where(x => x. == 500);
+            // Create a tensor from the list of input data
+            var inputTensor = new DenseTensor<float>(inputData.ToArray(), new[] { 1, inputData.Count });
 
-
-            //float day = newOrder.Date.Day;
-            DateTime date = DateTime.Today;
-
-            var input = new List<float>
-            {
-                (float)newOrder.Time,
-                (float)newOrder.Amount,                
-
-                //(float)date,
-
-                newOrder.DayOfWeek == "Mon" ? 1 : 0,
-                newOrder.DayOfWeek == "Sat" ? 1 : 0,
-                newOrder.DayOfWeek == "Sun" ? 1 : 0,
-                newOrder.DayOfWeek == "Thu" ? 1 : 0,
-                newOrder.DayOfWeek == "Tue" ? 1 : 0,
-                newOrder.DayOfWeek == "Wed" ? 1 : 0,
-
-                newOrder.EntryMode == "PIN" ? 1 : 0,
-                newOrder.EntryMode == "Tap" ? 1 : 0,
-
-                newOrder.TransactionType == "Online" ? 1 : 0,
-                newOrder.TransactionType == "POS" ? 1 : 0,
-                newOrder.TransactionType == "Online" ? 1 : 0,
-
-                newOrder.TransactionCountry == "India" ? 1 : 0,
-                newOrder.TransactionCountry == "Russia" ? 1 : 0,
-                newOrder.TransactionCountry == "USA" ? 1 : 0,
-                newOrder.TransactionCountry == "UnitedKingdom" ? 1 : 0,
-
-                newOrder.ShippingCountry == "India" ? 1 : 0,
-                newOrder.ShippingCountry == "Russia" ? 1 : 0,
-                newOrder.ShippingCountry == "USA" ? 1 : 0,
-                newOrder.ShippingCountry == "UnitedKingdom" ? 1 : 0,
-
-                newOrder.Bank == "HSBC" ? 1 : 0,
-                newOrder.Bank == "Halifax" ? 1 : 0,
-                newOrder.Bank == "Lloyds" ? 1 : 0,
-                newOrder.Bank == "Metro" ? 1 : 0,
-                newOrder.Bank == "Monzo" ? 1 : 0,
-                newOrder.Bank == "RBS" ? 1 : 0,
-
-                newOrder.CardType == "Visa" ? 1 : 0
-            };
-
-            var inputTensor = new DenseTensor<float>(input.ToArray(), new[] { 1, input.Count });
-
+            // Create NamedOnnxValue from tensor
             var inputs = new List<NamedOnnxValue>
             {
-                NamedOnnxValue.CreateFromTensor("float_input", inputTensor)
+                NamedOnnxValue.CreateFromTensor("input", inputTensor)
             };
 
-            var Fraud = new int();
-
+            // Run the model
             using (var results = _session.Run(inputs))
             {
-                var prediction = results.FirstOrDefault(item => item.Name == "output_label")?.AsTensor<long>().ToArray();
-                Fraud = (int)prediction[0];
-            }
+                var resultTensor = results.First().AsTensor<float>();
+                float fraudProbability = resultTensor[0];
+                bool isFraud = fraudProbability > 0.5f; // Assuming a threshold, adjust as needed
 
-            if (Fraud == 0)
-            {
-
-                return View("Confirmation");
-            }
-            else
-            {
-                return View("Review");
+                if (isFraud)
+                {
+                    return View("Review");
+                }
+                else
+                {
+                    return View("Confirmation");
+                }
             }
         }
+
 
 
         public IActionResult ListProducts(string filter, int pageNum = 1)

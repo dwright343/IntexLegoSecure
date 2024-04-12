@@ -62,4 +62,10 @@
     <_ContentIncludedByDefault Remove="Views\Shared\Components\ProjectTypes\Default.cshtml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Models\model.onnx">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
