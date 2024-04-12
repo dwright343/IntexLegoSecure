@@ -26,46 +26,46 @@
 
     <section class="products" id="products">
 
-        <h1 class="heading">Most <span>Liked</span> </h1>
+        <h1 class="heading">Recommended For You</h1>
 
         <div class="box-container">
 
             <div class="box">
                 <div class="image">
-                    <img src="~/images/lego1.jpg" />
+                    <img src="https://www.lego.com/cdn/cs/set/assets/blta12c30dbf0128a83/42168.png?format=webply&fit=bounds&quality=75&width=800&height=800&dpr=1" />
                     <div class="icons">
-                        <a href="#" class="cart-btn"><span class="fas fa-shopping-cart"></span></a>
+                        <a asp-controller="Home" asp-action="DetailedProduct" asp-route-id="29" class="cart-btn"><span class="fas fa-shopping-cart">Details</span></a>
                     </div>
                 </div>
                 <div class="content">
-                    <h3>Lego Set 1</h3>
-                    <div class="price">$70.99</div>
+                    <h3>John Deere 9700 Forage Harvester</h3>
+                    <div class="price">$40.00</div>
                 </div>
             </div>
 
             <div class="box">
                 <div class="image">
-                    <img src="~/images/lego1.jpg" />
+                    <img src="https://www.lego.com/cdn/cs/set/assets/blt3de19d1ec415c640/75361.png?format=webply&fit=bounds&quality=75&width=800&height=800&dpr=1" />
                     <div class="icons">
-                        <a href="#" class="cart-btn"><span class="fas fa-shopping-cart"></span></a>
+                        <a asp-controller="Home" asp-action="DetailedProduct" asp-route-id="28" class="cart-btn">Details<span class="fas fa-shopping-cart"></span></a>
                     </div>
                 </div>
                 <div class="content">
-                    <h3>Lego Set 1</h3>
-                    <div class="price">$70.99</div>
+                    <h3>Spider Tank</h3>
+                    <div class="price">$50.00</div>
                 </div>
             </div>
 
             <div class="box">
                 <div class="image">
-                    <img src="~/images/lego1.jpg" />
+                    <img src="https://www.lego.com/cdn/cs/set/assets/blt2afcd0d2c787e72f/31148.png?format=webply&fit=bounds&quality=75&width=800&height=800&dpr=1" />
                     <div class="icons">
-                        <a href="#" class="cart-btn"><span class="fas fa-shopping-cart"></span></a>
+                        <a asp-controller="Home" asp-action="DetailedProduct" asp-route-id="30" class="cart-btn">Details<span class="fas fa-shopping-cart"></span></a>
                     </div>
                 </div>
                 <div class="content">
-                    <h3>Lego Set 1</h3>
-                    <div class="price">$70.99</div>
+                    <h3>Retro Roller Skate</h3>
+                    <div class="price">$30.00</div>
                 </div>
             </div>
         </div>
@@ -83,7 +83,7 @@ else
                     <div class="image">
                         <img src="@product.ImgLink" />
                         <div class="icons">
-                            <a href="#" class="cart-btn"><span class="fas fa-shopping-cart">Add to cart</span></a>
+                            <a asp-controller="Home" asp-action="DetailedProduct" asp-route-id="@product.ProductId"class="cart-btn"><span class="fas fa-shopping-cart">Details</span></a>
                         </div>
                     </div>
                     <div class="content">
