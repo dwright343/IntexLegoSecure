@@ -34,63 +34,59 @@ namespace IntexLegoSecure.Controllers
         {
             _repo = temp;
 
-            try
-            {
-                _session = new InferenceSession("C:\\Users\\dayis\\source\\repos\\IntexLegoSecure\\model.onnx");
-            }
-            catch (Exception ex) 
-            {
-
-            }
+            _session = new InferenceSession("C:\\Users\\dayis\\source\\repos\\IntexLegoSecure\\model.onnx");                     
         }
 
-        public IActionResult PredictFraud()
-        {
-            var record = new Order customerOrder();
-            
+        public IActionResult PredictFraud(Order newOrder)
+        {            
             var fraud_dict = new Dictionary<int, string>
             {
                 {0, "Not fraud" },
                 {1, "Fraud" }
             };
 
+            float day = newOrder.Date.Day;
+
+
             var input = new List<float>
             {
-                (float)record.Time,
-                (float)record.Amount,
+                (float)newOrder.Time,
+                (float)newOrder.Amount,
 
-                record.DayOfWeek == "Mon" ? 1 : 0,
-                record.DayOfWeek == "Sat" ? 1 : 0,
-                record.DayOfWeek == "Sun" ? 1 : 0,
-                record.DayOfWeek == "Thu" ? 1 : 0,
-                record.DayOfWeek == "Tue" ? 1 : 0,
-                record.DayOfWeek == "Wed" ? 1 : 0,
+                day,
 
-                record.EntryMode == "PIN" ? 1 : 0,
-                record.EntryMode == "Tap" ? 1 : 0,
+                newOrder.DayOfWeek == "Mon" ? 1 : 0,
+                newOrder.DayOfWeek == "Sat" ? 1 : 0,
+                newOrder.DayOfWeek == "Sun" ? 1 : 0,
+                newOrder.DayOfWeek == "Thu" ? 1 : 0,
+                newOrder.DayOfWeek == "Tue" ? 1 : 0,
+                newOrder.DayOfWeek == "Wed" ? 1 : 0,
 
-                record.TransactionType == "Online" ? 1 : 0,
-                record.TransactionType == "POS" ? 1 : 0,
-                record.TransactionType == "Online" ? 1 : 0,
+                newOrder.EntryMode == "PIN" ? 1 : 0,
+                newOrder.EntryMode == "Tap" ? 1 : 0,
 
-                record.TransactionCountry == "India" ? 1 : 0,
-                record.TransactionCountry == "Russia" ? 1 : 0,
-                record.TransactionCountry == "USA" ? 1 : 0,
-                record.TransactionCountry == "UnitedKingdom" ? 1 : 0,
+                newOrder.TransactionType == "Online" ? 1 : 0,
+                newOrder.TransactionType == "POS" ? 1 : 0,
+                newOrder.TransactionType == "Online" ? 1 : 0,
 
-                record.ShippingCountry == "India" ? 1 : 0,
-                record.ShippingCountry == "Russia" ? 1 : 0,
-                record.ShippingCountry == "USA" ? 1 : 0,
-                record.ShippingCountry == "UnitedKingdom" ? 1 : 0,
+                newOrder.TransactionCountry == "India" ? 1 : 0,
+                newOrder.TransactionCountry == "Russia" ? 1 : 0,
+                newOrder.TransactionCountry == "USA" ? 1 : 0,
+                newOrder.TransactionCountry == "UnitedKingdom" ? 1 : 0,
 
-                record.Bank == "HSBC" ? 1 : 0,
-                record.Bank == "Halifax" ? 1 : 0,
-                record.Bank == "Lloyds" ? 1 : 0,
-                record.Bank == "Metro" ? 1 : 0,
-                record.Bank == "Monzo" ? 1 : 0,
-                record.Bank == "RBS" ? 1 : 0,
+                newOrder.ShippingCountry == "India" ? 1 : 0,
+                newOrder.ShippingCountry == "Russia" ? 1 : 0,
+                newOrder.ShippingCountry == "USA" ? 1 : 0,
+                newOrder.ShippingCountry == "UnitedKingdom" ? 1 : 0,
 
-                record.CardType == "Visa" ? 1 : 0
+                newOrder.Bank == "HSBC" ? 1 : 0,
+                newOrder.Bank == "Halifax" ? 1 : 0,
+                newOrder.Bank == "Lloyds" ? 1 : 0,
+                newOrder.Bank == "Metro" ? 1 : 0,
+                newOrder.Bank == "Monzo" ? 1 : 0,
+                newOrder.Bank == "RBS" ? 1 : 0,
+
+                newOrder.CardType == "Visa" ? 1 : 0
             };
 
             var inputTensor = new DenseTensor<float>(input.ToArray(), new[] { 1, input.Count });
@@ -100,7 +96,22 @@ namespace IntexLegoSecure.Controllers
                 NamedOnnxValue.CreateFromTensor("float_input", inputTensor)
             };
 
+            var Fraud = new int();
 
+            using (var results = _session.Run(inputs))
+            {
+                var prediction = results.FirstOrDefault(item => item.Name == "output_label")?.AsTensor<long>().ToArray();
+                Fraud = (int)prediction[0];
+            }
+
+            if (Fraud == 0)
+            {
+                return View();
+            }
+            else
+            {
+                return View();
+            }
             
         }
 
