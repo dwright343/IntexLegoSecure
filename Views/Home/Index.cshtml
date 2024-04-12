@@ -1,5 +1,4 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using System.Security.Claims
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 @model IEnumerable<Product>
@@ -22,99 +21,7 @@
 </section>
 
 
-
-@{
-    // Define the specific user ID
-    string specificUserId = "8ebb14ef-10d7-498b-b1b7-d429eec71f01";
-
-    // Get the current logged-in user's ID from claims
-    string currentUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-}
-
-@if (currentUserId == specificUserId)
-{
-    <section class="products" id="products">
-
-        <h1 class="heading">Recommended For You, Izrael</h1>
-
-        <div class="box-container">
-
-            <div class="box">
-                <div class="image">
-                    <img src="https://www.lego.com/cdn/cs/set/assets/blta12c30dbf0128a83/42168.png?format=webply&fit=bounds&quality=75&width=800&height=800&dpr=1" />
-                    <div class="icons">
-                        <a asp-controller="Home" asp-action="DetailedProduct" asp-route-id="29" class="cart-btn"><span class="fas fa-shopping-cart">Details</span></a>
-                    </div>
-                </div>
-                <div class="content">
-                    <h3>John Deere 9700 Forage Harvester</h3>
-                    <div class="price">$40.00</div>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="image">
-                    <img src="https://www.lego.com/cdn/cs/set/assets/blt3de19d1ec415c640/75361.png?format=webply&fit=bounds&quality=75&width=800&height=800&dpr=1" />
-                    <div class="icons">
-                        <a asp-controller="Home" asp-action="DetailedProduct" asp-route-id="28" class="cart-btn">Details<span class="fas fa-shopping-cart"></span></a>
-                    </div>
-                </div>
-                <div class="content">
-                    <h3>Spider Tank</h3>
-                    <div class="price">$50.00</div>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="image">
-                    <img src="https://www.lego.com/cdn/cs/set/assets/blt2afcd0d2c787e72f/31148.png?format=webply&fit=bounds&quality=75&width=800&height=800&dpr=1" />
-                    <div class="icons">
-                        <a asp-controller="Home" asp-action="DetailedProduct" asp-route-id="30" class="cart-btn">Details<span class="fas fa-shopping-cart"></span></a>
-                    </div>
-                </div>
-                <div class="content">
-                    <h3>Retro Roller Skate</h3>
-                    <div class="price">$30.00</div>
-                </div>
-            </div>
-        </div>
-    </section>
-}
-else
-{
-    <section class="products" id="products">
-        <h1 class="heading">Best <span>Sellers</span> </h1>
-        <div class="box-container">
-            @foreach (var product in Model)
-            {
-                <div class="box">
-                    <div class="image">
-                        <img src="@product.ImgLink" />
-                        <div class="icons">
-                            <a asp-controller="Home" asp-action="DetailedProduct" asp-route-id="@product.ProductId" class="cart-btn"><span class="fas fa-shopping-cart">Details</span></a>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <h3>@product.Name</h3>
-                        <div class="price">$@product.Price</div>
-                    </div>
-                </div>
-            }
-        </div>
-    </section>
-}
-
-
-
-
-
-
-
-
-
-
-
-@* @if (SignInManager.IsSignedin(User))
+@if (SignInManager.IsSignedIn(User))
 {
 
     <section class="products" id="products">
@@ -181,14 +88,14 @@ else
                     </div>
                     <div class="content">
                         <h3>@product.Name</h3>
-                        <div class="price">$@product.Price</div>
+                        <div class="price">@product.Price</div>
                     </div>
                 </div>
             }
         </div>
     </section>
 }
- *@
+
 
 
 
@@ -231,51 +138,46 @@ else
 
 </section>
 
-
-@await Html.PartialAsync("CookieConsentPartial")
-
-
-@* <div class="cookie-notification">
+<div class="cookie-notification">
     <div class="cookie-content">
         <p>This website uses cookies to ensure you get the best experience on our website.</p>
         <button class="accept-btn" onclick="hideNotification()">Accept</button>
     </div>
-</div> *@
+</div>
 
 <style>
-    .cookie-consent-container {
+    .cookie-notification {
         position: fixed;
-        left: 0;
         bottom: 0;
+        left: 0;
         width: 100%;
-        background-color: black;
-        color: white;
-        text-align: center;
-        padding: 10px;
-        z-index: 1000;
+        background-color: #f8f8f8;
+        padding: 20px;
+        z-index: 9999;
     }
 
-        .cookie-consent-container p {
-            margin: 10px 0;
-        }
+    .cookie-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-        .cookie-consent-container button {
-            color: white;
-            background-color: #4CAF50;
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
+    .cookie-content p {
+        margin: 0;
+    }
 
-
-
+    .accept-btn {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
 </style>
 
-
-
+<script>
+    function hideNotification() {
+        var notification = document.querySelector('.cookie-notification');
+        notification.style.display = 'none';
+    }
+</script>

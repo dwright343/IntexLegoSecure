@@ -22,7 +22,7 @@ namespace IntexLegoSecure.Controllers
         public IActionResult Index()
         {
             // Retrieve products with specific IDs (e.g., 21, 19, 3) from the database
-            var productIds = new List<int> { 27, 33, 34};
+            var productIds = new List<int> { 27, 33, 3 };
             var products = _repo.Products.Where(p => productIds.Contains(p.ProductId)).ToList();
 
             // Pass the products to the view
@@ -117,11 +117,7 @@ namespace IntexLegoSecure.Controllers
         }
 
 
-        [Authorize]
-        public IActionResult OrderConfirmation()
-        {
-            return View();
-        }
+
 
 
 

@@ -24,27 +24,6 @@
                 <p><strong>Secondary Color:</strong> @Model.SecondaryColor</p>
                 <p><strong>Category:</strong> @Model.Category</p>
                 <p><strong>Description:</strong> @Model.Description</p>
-@*                 <form id="@Model.ProductId" method="post" asp-page="/Cart">
-                    <div class="icons">
-                        <input type="hidden" asp-for="ProductId" />
-                        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-
-                        <!-- Using a button for form submission -->
-                        <button type="submit" class="cart-btn fas fa-shopping-cart">
-                            <span>Add to cart</span>
-                        </button>
-                    </div>
-                </form> *@
-@*                 <form id=@Model.ProductId method="post" asp-page="/Cart">
-                    <div class="icons">
-                    <input type="hidden" asp-for="ProductId" />
-                    <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-                        <button type="submit" class="cart-btn fas fa-shopping-cart">
-                            <span>Add to cart</span>
-                        </button>
-                    <button type="submit" class="btn-outline-success btn-sm float-end">Add to cart</button>
-                    </div>
-                </form> *@
                 <form id=@Model.ProductId method="post" asp-page="/Cart">
                     <input type="hidden" asp-for="ProductId" />
                     <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
@@ -56,6 +35,35 @@
         </div>
     </div>
 </section>
+
+
+<!--RECOMMENDED SECTION WHERE WE WILL PLACE THE RECOMMENDATIONS BASED ON USER LOGGED IN -->
+
+
+<section class="about">
+    <h3 class="heading">Recommended for you</h3>
+    <h2 class="product-title" style="color: #ff6a00;">@Model.Name</h2>
+    <div class="attributes-box">
+        <div class="attributes">
+            <p><strong>Price:</strong> $@Model.Price</p>
+            <div class="image">
+                
+                <img src="@Model.ImgLink" alt="@Model.Name" class="product-image"/>
+            </div>
+
+            <form id=@Model.ProductId method="post" asp-page="/Cart">
+                <input type="hidden" asp-for="ProductId" />
+                <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                <div class="text-center">
+                    <button type="submit" class="btn = btn-primary">Add to Cart</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+
 
 <style>
     .product-details {
