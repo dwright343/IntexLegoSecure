@@ -1,8 +1,11 @@
-﻿using IntexLegoSecure.Models;
+﻿using IntexLegoSecure.Data;
+using IntexLegoSecure.Models;
+using IntexLegoSecure.Models.ViewModels;
 using IntexLegoSecure.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.Metrics;
 
 namespace IntexLegoSecure.Controllers
@@ -15,12 +18,16 @@ namespace IntexLegoSecure.Controllers
 
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ApplicationDbContext _context;
         public AdministrationController(RoleManager<IdentityRole> roleManager,
-                                UserManager<ApplicationUser> userManager)
+                                UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _roleManager = roleManager;
             _userManager = userManager;
+            _context = context;
         }
+
+
 
     // User Management -------------------------------------------------------------------------------------------
         
@@ -316,6 +323,136 @@ namespace IntexLegoSecure.Controllers
             }
 
             return RedirectToAction("EditRole", new { Id = roleId });
+        }
+
+        // Product Management -------------------------------------------------------------------------------------------
+
+        [HttpGet]
+        public IActionResult AdminProducts()
+        {
+            var products = _context.Products;
+            return View(products);
+        }
+
+        [HttpGet]
+        public IActionResult CreateProduct()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> CreateProduct(CreateProductViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Product product = new Product
+                {
+                    Name = model.Name,
+                    Year = model.Year,
+                    NumParts = model.NumParts,
+                    Price = model.Price,
+                    ImgLink = model.ImgLink,
+                    PrimaryColor = model.PrimaryColor,
+                    SecondaryColor = model.SecondaryColor,
+                    Description = model.Description,
+                    Category = model.Category
+                };
+
+                _context.Add(product);
+
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("AdminProducts", "Administration");
+            }
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            // Query the database for the product with the specific ID
+            var product = await _context.Products
+                                        .FirstOrDefaultAsync(p => p.ProductId == id);
+
+            // If no product is found, return a NotFound result
+            if (product == null)
+            {
+                ViewBag.ErrorMessage = $"Product with Id = {id} cannot be found";
+                return View("NotFound");
+            }
+
+            // Remove the product from the database context
+            _context.Products.Remove(product);
+
+            // Save the changes to the database
+            await _context.SaveChangesAsync();
+
+            // Redirect to a view showing all products after the deletion is completed
+            return RedirectToAction("AdminProducts", "Administration");  // Adjust "Index" to your actual list view if necessary
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditProduct(int id)
+        {
+            var product = await _context.Products
+                                        .FirstOrDefaultAsync(p => p.ProductId == id);
+
+            if (product == null)
+            {
+                ViewBag.ErrorMessage = $"Product with Id = {id} cannot be found";
+                return View("NotFound");
+            }
+
+            var model = new EditProductViewModel
+            {
+                ProductId = product.ProductId,
+                Name = product.Name,
+                Year = product.Year,
+                NumParts = product.NumParts,
+                Price = product.Price,
+                ImgLink = product.ImgLink,
+                PrimaryColor = product.PrimaryColor,
+                SecondaryColor = product.SecondaryColor,
+                Description = product.Description,
+                Category = product.Category
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditProduct(int id, EditProductViewModel model)
+        {
+            var product = await _context.Products
+                                        .FirstOrDefaultAsync(p => p.ProductId == id);
+
+            if (product == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {model.ProductId} cannot be found";
+                return View("NotFound");
+            }
+            else
+            {
+                product.Name = model.Name;
+                product.Year = model.Year;
+                product.NumParts = model.NumParts;
+                product.Price = model.Price;
+                product.ImgLink = model.ImgLink;
+                product.PrimaryColor = model.PrimaryColor;
+                product.SecondaryColor = model.SecondaryColor;
+                product.Description = model.Description;
+                product.Category = model.Category;
+
+
+                _context.Update(product);
+
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("AdminProducts", "Administration");
+            }
         }
     }
 }
