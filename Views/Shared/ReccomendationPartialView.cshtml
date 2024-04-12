@@ -1,0 +1,57 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Product
+<link rel="stylesheet" href="~/css/Style.css" />
+
+<div>
+
+    <section class="products" id="products">
+        @* <h1 class="heading">Our <span>Products</span> </h1> *@
+        <div class="box-container">
+
+            <div class="box">
+
+                <div class="image">
+                    <img src="@Model.ImgLink" />
+                    <div class="icons">
+                        @* This was in here before. Keep this one for Vicki *@
+                        @*                         <form method="post" asp-page="/Cart" class="icons" id=@Model.ProductId>
+                        <input type="hidden" asp-for="ProductId" />
+                        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                        <a href="#" class="cart-btn"><span class="fas fa-shopping-cart"></span></a>
+                        </form> *@
+                        @*                          <form id=@Model.ProductId method="post" asp-page="/Cart">
+
+                        <div class="icons"><input type="hidden" asp-for="ProductId" />
+                        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                        <a class="cart-btn">
+                        <span class="fas fa-shopping-cart"></span<button type="submit" class="cart-btn">Add to cart</button></a>
+                        </form>
+                        <form id="@Model.ProductId" method="post" asp-page="/Cart">
+                        <div class="icons">
+                        <input type="hidden" asp-for="ProductId" />
+                        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+
+                        <!-- Styling link for the button appearance -->
+                        <a class="cart-btn fas fa-shopping-cart" href="javascript:void(0)" onclick="document.getElementById('@Model.ProductId').submit();">
+                        <span>Add to cart</span>
+                        </a>
+                        </div>
+                        </form>
+                        <button type="submit" form="@Model.ProductId" class="cart-btn fas fa-shopping-cart">
+                        <span>Add to cart</span> *@
+
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>@Model.Name</h3>
+                    <div class="price">$@Model.Price</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

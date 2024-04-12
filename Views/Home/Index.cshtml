@@ -1,27 +1,109 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 @model IEnumerable<Product>
 
 @{
     ViewData["Title"] = "Home Page";
+    // Define the specific user ID
+    string specificUserId = "8ebb14ef-10d7-498b-b1b7-d429eec71f01";
+    // Get the current logged-in user's ID from claims
+    string currentUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 }
 
 <section class="home" id="home">
-
     <div class="content">
         <h3>Escape</h3>
-        <span> with Shadow the Hedgehog </span>
-        <p>Action play and thrills boost the creative fun in this cool LEGO® Sonic the Hedgehog™ Shadow the 
-            Hedgehog Escape toy for kids. </p>
+        <span>with Shadow the Hedgehog</span>
+        <p>Action play and thrills boost the creative fun in this cool LEGO® Sonic the Hedgehog™ Shadow the Hedgehog Escape toy for kids.</p>
         <a asp-area="" asp-controller="Home" asp-action="ListProducts" class="btn">Shop Now</a>
-
     </div>
-
 </section>
 
+@if (currentUserId == specificUserId)
+{
+    <section class="products" id="products">
 
-@if (SignInManager.IsSignedIn(User))
+        <h1 class="heading">Recommended For You, Izrael</h1>
+
+        <div class="box-container">
+
+            <div class="box">
+                <div class="image">
+                    <img src="https://www.lego.com/cdn/cs/set/assets/blta12c30dbf0128a83/42168.png?format=webply&fit=bounds&quality=75&width=800&height=800&dpr=1" />
+                    <div class="icons">
+                        <a asp-controller="Home" asp-action="DetailedProduct" asp-route-id="29" class="cart-btn"><span class="fas fa-shopping-cart">Details</span></a>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>John Deere 9700 Forage Harvester</h3>
+                    <div class="price">$40.00</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="image">
+                    <img src="https://www.lego.com/cdn/cs/set/assets/blt3de19d1ec415c640/75361.png?format=webply&fit=bounds&quality=75&width=800&height=800&dpr=1" />
+                    <div class="icons">
+                        <a asp-controller="Home" asp-action="DetailedProduct" asp-route-id="28" class="cart-btn">Details<span class="fas fa-shopping-cart"></span></a>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>Spider Tank</h3>
+                    <div class="price">$50.00</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="image">
+                    <img src="https://www.lego.com/cdn/cs/set/assets/blt2afcd0d2c787e72f/31148.png?format=webply&fit=bounds&quality=75&width=800&height=800&dpr=1" />
+                    <div class="icons">
+                        <a asp-controller="Home" asp-action="DetailedProduct" asp-route-id="30" class="cart-btn">Details<span class="fas fa-shopping-cart"></span></a>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>Retro Roller Skate</h3>
+                    <div class="price">$30.00</div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+else
+{
+    <section class="products" id="products">
+        <h1 class="heading">Best <span>Sellers</span> </h1>
+        <div class="box-container">
+            @foreach (var product in Model)
+            {
+                <div class="box">
+                    <div class="image">
+                        <img src="@product.ImgLink" />
+                        <div class="icons">
+                            <a asp-controller="Home" asp-action="DetailedProduct" asp-route-id="@product.ProductId" class="cart-btn"><span class="fas fa-shopping-cart">Details</span></a>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <h3>@product.Name</h3>
+                        <div class="price">@product.Price</div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+}
+
+
+
+
+
+
+
+
+
+
+@* @if (SignInManager.IsSignedIn(User))
 {
 
     <section class="products" id="products">
@@ -96,7 +178,7 @@ else
     </section>
 }
 
-
+ *@
 
 
 
