@@ -5,7 +5,7 @@
 }
 
 
-@model IEnumerable<Order>
+@model IntexLegoSecure.ViewModels.FraudRoleViewModel
 
 @{
     ViewData["Title"] = "Order Review";
@@ -49,7 +49,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (Order c in Model)
+        @foreach (Order c in Model.Orders)
         {
             <tr class="fraud-@c.Fraud">
                 <td>@c.CustomerId</td>
@@ -93,4 +93,25 @@
         });
 </script>
 
-</script>
+
+
+<div page-model="@Model.PaginationInfo" page-action="OrderReview" page-classes-enabled="true" page-class="btn"
+     page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
+     class="btn-group pull-right m-1">
+     </div>
+
+
+            @*<div>
+                @if (Model.CurrentPage > 1)
+                {
+                    <a href="@Url.Action("Orders", new { page = Model.CurrentPage - 1 })">Previous</a>
+                }
+
+                @if (Model.CurrentPage < Model.TotalPages)
+                {
+                    <a href="@Url.Action("Orders", new { page = Model.CurrentPage + 1 })">Next</a>
+                }
+            </div>*@
+
+
+       

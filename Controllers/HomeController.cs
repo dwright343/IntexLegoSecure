@@ -61,11 +61,34 @@ namespace IntexLegoSecure.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public IActionResult OrderReview()
+
+        public IActionResult OrderReview(int pageNum = 1, int pageSize = 1000) // name this pageNum, because "page" means something to the .NET environment
         {
-            var order = _repo.Orders;
-            return View(order);
+            var PageInfo = new FraudRoleViewModel
+            {
+                Orders = _repo.Orders
+
+                .OrderBy(x => x.TransactionId)
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize),
+
+                PaginationInfo = new PaginationInfo
+                {
+                    CurrentPage = pageNum,
+                    ItemsPerPage = pageSize,
+                    TotalItems = _repo.Orders.Count()
+                },
+            };
+
+            return View(PageInfo);
         }
+
+
+
+
+
+
+
 
         [Authorize]
         public IActionResult Secrets()
