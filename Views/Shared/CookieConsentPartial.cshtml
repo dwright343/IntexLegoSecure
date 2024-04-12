@@ -1,0 +1,26 @@
+﻿<div id="cookieConsentContainer" class="cookie-consent-container" style="display:none;">
+    <p>This website uses cookies to ensure you get the best experience on our website.</p>
+    <button onclick="acceptCookieConsent();">Accept</button>
+</div>
+
+@section Scripts {
+    <script>
+        window.onload = function () {
+            // Check if the cookie consent has been accepted
+            if (document.cookie.indexOf('cookieConsent=true') == -1) {
+                // Show the cookie consent notification if not found
+                document.getElementById('cookieConsentContainer').style.display = 'block';
+            }
+        };
+
+        function acceptCookieConsent() {
+            var consentContainer = document.getElementById('cookieConsentContainer');
+            // Hide the consent container
+            consentContainer.style.display = 'none';
+            // Set a cookie to remember the consent
+            document.cookie = "cookieConsent=true; max-age=" + 60 * 60 * 24 * 30 + "; path=/"; // Expires in 30 days
+        }
+    </script>
+}
+
+
