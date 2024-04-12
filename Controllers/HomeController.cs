@@ -29,9 +29,6 @@ namespace IntexLegoSecure.Controllers
             return View(products);
         }
 
-
-
-
         private I_Repository _repo;
         public HomeController(I_Repository temp)
         {
