@@ -78,16 +78,16 @@ public class Program
             googleOptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
         });
 
-        //builder.Services.Configure<IdentityOptions>(options =>
-        //{
-        //    // Default Password settings.
-        //    options.Password.RequireDigit = true;
-        //    options.Password.RequireLowercase = true;
-        //    options.Password.RequireNonAlphanumeric = true;
-        //    options.Password.RequireUppercase = true;
-        //    options.Password.RequiredLength = 10;
-        //    options.Password.RequiredUniqueChars = 1;
-        //});
+        IServiceCollection serviceCollection = builder.Services.Configure<IdentityOptions>(options =>
+        {
+            // Default Password settings.
+            options.Password.RequireDigit = true;
+            options.Password.RequireLowercase = true;
+            options.Password.RequireNonAlphanumeric = true;
+            options.Password.RequireUppercase = true;
+            options.Password.RequiredLength = 10;
+            options.Password.RequiredUniqueChars = 1;
+        });
 
 
         var app = builder.Build();
