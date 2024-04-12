@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
 using System.Drawing.Text;
+using Elfie.Serialization;
 
 
 namespace IntexLegoSecure.Controllers
@@ -36,7 +37,7 @@ namespace IntexLegoSecure.Controllers
 
         private I_Repository _repo;
         public HomeController(I_Repository temp)
-        { 
+        {
             _repo = temp;
 
             _session = new InferenceSession("C:\\Users\\dayis\\source\\repos\\IntexLegoSecure\\model.onnx");
