@@ -20,13 +20,26 @@ public class Program
 
         var builder = WebApplication.CreateBuilder(args);
 
-        //Initialize Key Vault Client
-        //var keyVaultUrl = builder.Configuration["KeyVault:VaultUri"]; // Ensure you have this in your appsettings or as an environment variable
-        //var secretClient = new SecretClient(new Uri(keyVaultUrl), new DefaultAzureCredential());
+        //start
 
-        //Fetch secrets from Azure Key Vault
-        //var googleClientId = secretClient.GetSecret("Google-Client-ID").Value.Value;
-        //var googleClientSecret = secretClient.GetSecret("Google-Client-Secret").Value.Value;
+        ////Initialize Key Vault Client
+        var keyVaultUrl = builder.Configuration["KeyVault:VaultUri"]; // Ensure you have this in your appsettings or as an environment variable
+        var secretClient = new SecretClient(new Uri(keyVaultUrl), new DefaultAzureCredential());
+
+        ////Fetch secrets from Azure Key Vault
+        var googleClientId = secretClient.GetSecret("Google-Client-ID").Value.Value;
+        var googleClientSecret = secretClient.GetSecret("Google-Client-Secret").Value.Value;
+        var dbUserId = (await secretClient.GetSecretAsync("db-user-id")).Value.Value;
+        var dbPassword = (await secretClient.GetSecretAsync("db-password")).Value.Value;
+
+        // Compose the connection string with the sensitive data
+        var connectionString2 = builder.Configuration.GetConnectionString("DefaultConnection")
+            + $"User ID={dbUserId};Password={dbPassword};";
+
+        // Add services to the container.
+        builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(connectionString2));
+        // end
 
         // Add services to the container.
         var UseSqlite = false;
@@ -62,21 +75,25 @@ public class Program
             .AddEntityFrameworkStores<ApplicationDbContext>();
         builder.Services.AddControllersWithViews();
 
-        ////Configure Google Authentication with Key Vault secrets
-        //builder.Services.AddAuthentication().AddGoogle(googleOptions =>
-        //{
-        //    googleOptions.ClientId = googleClientId;
-        //    googleOptions.ClientSecret = googleClientSecret;
-        //});
+        //start
+
+        //Configure Google Authentication with Key Vault secrets
+        builder.Services.AddAuthentication().AddGoogle(googleOptions =>
+        {
+            googleOptions.ClientId = googleClientId;
+            googleOptions.ClientSecret = googleClientSecret;
+        });
+
+        //end
 
         builder.Services.AddScoped<UserManager<ApplicationUser>>();
 
-        //Google Authentication
-        builder.Services.AddAuthentication().AddGoogle(googleOptions =>
-        {
-            googleOptions.ClientId = builder.Configuration["Authentication:Google:ClientId"];
-            googleOptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
-        });
+        ////Google Authentication
+        //builder.Services.AddAuthentication().AddGoogle(googleOptions =>
+        //{
+        //    googleOptions.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+        //    googleOptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+        //});
 
         IServiceCollection serviceCollection = builder.Services.Configure<IdentityOptions>(options =>
         {
