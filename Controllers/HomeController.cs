@@ -5,6 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using IntexLegoSecure.ViewModels;
 using IntexLegoSecure.Models.ViewModels;
+using Microsoft.AspNetCore.Http;
+using Microsoft.ML.OnnxRuntime;
+using Microsoft.ML.OnnxRuntime.Tensors;
+using System.Drawing.Text;
 
 
 namespace IntexLegoSecure.Controllers
@@ -18,6 +22,7 @@ namespace IntexLegoSecure.Controllers
         //{
         //    _logger = logger;
         //}
+        private readonly InferenceSession _session;
 
         public IActionResult Index()
         {
@@ -31,9 +36,15 @@ namespace IntexLegoSecure.Controllers
 
         private I_Repository _repo;
         public HomeController(I_Repository temp)
-        {
+        { 
             _repo = temp;
+            
         }
+            
+         
+        
+
+    
 
         public IActionResult ListProducts(string filter, int pageNum = 1)
         {
