@@ -1,4 +1,8 @@
 ﻿@{
+Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
     if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout !=  null)
     {
         Layout = parentLayout.ToString();
@@ -8,11 +12,11 @@
         Layout = "/Areas/Identity/Pages/Account/Manage/_Layout.cshtml";
     }
 }
-
-<h1>Manage your account</h1>
+<section class="about">
+<h1 class="heading">Manage your account</h1>
 
 <div>
-    <h2>Change your account settings</h2>
+    <h2 class="heading">Change your account settings</h2>
     <hr />
     <div class="row">
         <div class="col-md-3">
@@ -27,3 +31,5 @@
 @section Scripts {
     @RenderSection("Scripts", required: false)
 }
+
+</section>
