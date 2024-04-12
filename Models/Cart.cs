@@ -33,7 +33,7 @@ namespace IntexLegoSecure.Models
 
         public decimal CalculateTotal()
         {
-            var sum = Lines.Sum(x => 25 * x.Quantity);
+            var sum = Lines.Sum(x => x.Product.Price * x.Quantity);
 
             return sum;
         }

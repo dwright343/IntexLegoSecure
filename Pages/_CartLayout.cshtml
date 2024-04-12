@@ -21,7 +21,7 @@
         </a>
 
         @await RenderSectionAsync("Scripts", required: false)
-        
+
         <nav class="navbar">
             <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
             <a asp-area="" asp-controller="Home" asp-action="About">About</a>
@@ -33,14 +33,14 @@
                     <a>Logout</a>
                 </form>
                 <a href="javascript:void(0);" onclick="document.getElementById('logoutForm').submit();">Logout</a>
-                    
-@*                       <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-                </form> *@
+
+                @*                       <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+            </form> *@
             }
             else
             {
-                <a  asp-area="Identity" asp-page="/Account/Login">Login</a>
+                <a asp-area="Identity" asp-page="/Account/Login">Login</a>
             }
         </nav>
         <div class="icons">
@@ -49,7 +49,7 @@
             <a href="#" class="fas fa-user"></a>
         </div>
     </header>
-    
+
     <div class="content">
         @RenderBody()
     </div>
