@@ -30,35 +30,35 @@ namespace IntexLegoSecure.Controllers
             _repo = temp;
         }
 
-        public IActionResult ListProducts(string? category, int pageNum = 1)
+        public IActionResult ListProducts(string filter, int pageNum = 1)
         {
             int pageSize = 5;
+            var productsQuery = _repo.Products.AsQueryable();
 
             // Fetch distinct categories from your products
-            var categories = _repo.Products.Select(p => p.Category).Distinct().ToList();
 
             // Filter products based on the selected category
-            IQueryable<Product> productsQuery = _repo.Products.AsQueryable(); // Convert to IQueryable
 
-            if (!string.IsNullOrEmpty(category))
+            if (!string.IsNullOrEmpty(filter))
             {
-                productsQuery = productsQuery.Where(p => p.Category == category);
+                productsQuery = productsQuery.Where(p => p.Category.Contains(filter));
             }
 
             var PageInfo = new DefaultListViewModel
             {
-                Categories = categories,
                 Products = productsQuery
-                    .OrderBy(x => x.ProductId)
-                    .Skip((pageNum - 1) * pageSize)
-                    .Take(pageSize),
-
+                            .OrderBy(x => x.ProductId)
+                            .Skip((pageNum - 1) * pageSize)
+                            .Take(pageSize)
+                            .ToList(),
+                
                 PaginationInfo = new PaginationInfo
                 {
                     CurrentPage = pageNum,
                     ItemsPerPage = pageSize,
-                    TotalItems = string.IsNullOrEmpty(category) ? _repo.Products.Count() : productsQuery.Count()
-                }
+                    TotalItems = _repo.Products.Count(p => string.IsNullOrEmpty(filter) || p.Category.Contains(filter))
+                },
+                CurrentFilter = filter
             };
 
             return View(PageInfo);

@@ -8,12 +8,26 @@
 <h1 class="heading">Our <span>Products</span> </h1>
 
 
-<div class="category-buttons">
+@* <div class="category-buttons">
     @foreach(var category in Model.Categories)
     {
     <a href="@Url.Action("ListProducts", "Home", new { category = category })" class="category-button" style="background-color: #ff6a00; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 1.2rem; cursor: pointer; transition: background-color 0.3s ease;">@category</a>
     }
-</div>
+</div> *@
+
+<form method="get">
+    <select name="filter">
+        <option value="" selected="@(Model.CurrentFilter == "All Categories" ? "selected" : "")">All Categories</option>
+        <option value="Star Wars" selected="@(Model.CurrentFilter == "Star Wars" ? "selected" : "")">Star Wars</option>
+        <option value="Vehicle" selected="@(Model.CurrentFilter == "Vehicle" ? "selected" : "")">Vehicle</option>
+        <option value="Flight" selected="@(Model.CurrentFilter == "Flight" ? "selected" : "")">Flight</option>
+        <option value="Normal" selected="@(Model.CurrentFilter == "Normal" ? "selected" : "")">Normal</option>
+        <option value="Legos" selected="@(Model.CurrentFilter == "Legos" ? "selected" : "")">Lego</option>
+        <option value="Star Wars" selected="@(Model.CurrentFilter == "Star Wars" ? "selected" : "")">Star Wars</option>
+        <option value="Star Wars" selected="@(Model.CurrentFilter == "Star Wars" ? "selected" : "")">Star Wars</option>
+    </select>
+    <input type="submit" value="Filter" />
+</form>
 
 
 @foreach (Product d in Model.Products)
@@ -26,6 +40,8 @@
 @* <a asp-controller="Home" asp-action="Index" asp-route-pageNum="1">1</a>
 <a asp-controller="Home" asp-action="Index" asp-route-pageNum="2">2</a>
 <a asp-controller="Home" asp-action="Index" asp-route-pageNum="3">3</a> *@
+
+
 
 <div page-model="@Model.PaginationInfo" page-action="ListProducts" page-classes-enabled="true" page-class="btn"
      page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
