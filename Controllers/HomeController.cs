@@ -38,7 +38,8 @@ namespace IntexLegoSecure.Controllers
         public HomeController(I_Repository temp)
         { 
             _repo = temp;
-            
+
+            _session = new InferenceSession("C:\\Users\\dayis\\source\\repos\\IntexLegoSecure\\model.onnx");
         }
 
 
