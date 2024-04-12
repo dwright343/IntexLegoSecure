@@ -31,21 +31,34 @@
   <ItemGroup>
     <Compile Remove="wwwroot\Components\**" />
     <Compile Remove="Components\**" />
+    <Compile Remove="Views\Shared\Components\ProjectTypes\**" />
+    <Compile Remove="Component\**" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Remove="wwwroot\Components\**" />
     <EmbeddedResource Remove="Components\**" />
+    <EmbeddedResource Remove="Views\Shared\Components\ProjectTypes\**" />
+    <EmbeddedResource Remove="Component\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Remove="wwwroot\Components\**" />
     <Content Remove="Components\**" />
+    <Content Remove="Views\Shared\Components\ProjectTypes\Default.cshtml" />
+    <Content Remove="Views\Shared\Components\ProjectTypes\**" />
+    <Content Remove="Component\**" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="wwwroot\Components\**" />
     <None Remove="Components\**" />
+    <None Remove="Views\Shared\Components\ProjectTypes\**" />
+    <None Remove="Component\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Shared\Components\ProjectTypes\Default.cshtml" />
   </ItemGroup>
 
 </Project>

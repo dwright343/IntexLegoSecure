@@ -10,6 +10,9 @@ namespace IntexLegoSecure.Controllers
     [Authorize(Roles = "Admin")]
     public class AdministrationController : Controller
     {
+
+
+
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<ApplicationUser> _userManager;
         public AdministrationController(RoleManager<IdentityRole> roleManager,
@@ -129,6 +132,13 @@ namespace IntexLegoSecure.Controllers
         }
 
     // Role Management -------------------------------------------------------------------------------------------
+        
+        public IActionResult AdminTools()
+        {
+            return View();
+        }
+        
+        
         
         [HttpGet]
         public IActionResult CreateRole()

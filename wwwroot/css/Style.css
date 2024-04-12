@@ -377,6 +377,28 @@ header .navbar a {
     background-color: #ff6a00; /* Adjust hover color as needed */
 }
 
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem; /* Adjust the gap between products as needed */
+}
+
+.product-list > div {
+    flex: 1 1 calc(50% - 0.5rem); /* Adjust the width of each product container */
+    padding: 1rem;
+    border: 1px solid #ccc; /* Add borders around each product container */
+    border-radius: 5px;
+    background-color: #f9f9f9; /* Add a background color to each product container */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a shadow effect to each product container */
+    transition: box-shadow 0.3s ease;
+}
+
+.product-list > div:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adjust the hover effect shadow */
+}
+
+
 footer {
     padding: 2rem 9%;
 }
@@ -590,16 +612,3 @@ footer {
     color:var(--orange)
 }*/
 
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    z-index: 1;
-    left: 0;
-    background-color: #fff; /* Change this as needed */
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    min-width: 160px;
-}
-
-.nav-item:hover .dropdown-menu {
-    display: block;
-}

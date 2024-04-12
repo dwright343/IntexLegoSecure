@@ -31,14 +31,73 @@ namespace IntexLegoSecure.Controllers
             _repo = temp;
         }
 
-        public IActionResult ListProducts(string? primaryColor, int pageNum = 1) // name this pageNum, because "page" means something to the .NET environment
+        public IActionResult ListProducts(string filter, int pageNum = 1)
         {
             int pageSize = 5;
-            var PageInfo = new ProductListViewModel
+            var productsQuery = _repo.Products.AsQueryable();
+
+            // Fetch distinct categories from your products
+
+            // Filter products based on the selected category
+
+            if (!string.IsNullOrEmpty(filter))
             {
-                Products = _repo.Products
-                .Where(x => x.PrimaryColor == primaryColor || primaryColor == null)
-                .OrderBy(x => x.ProductId)
+                productsQuery = productsQuery.Where(p => p.Category.Contains(filter));
+            }
+
+            var PageInfo = new DefaultListViewModel
+            {
+                Products = productsQuery
+                            .OrderBy(x => x.ProductId)
+                            .Skip((pageNum - 1) * pageSize)
+                            .Take(pageSize)
+                            .ToList(),
+                
+                PaginationInfo = new PaginationInfo
+                {
+                    CurrentPage = pageNum,
+                    ItemsPerPage = pageSize,
+                    TotalItems = _repo.Products.Count(p => string.IsNullOrEmpty(filter) || p.Category.Contains(filter))
+                },
+                CurrentFilter = filter
+            };
+
+            return View(PageInfo);
+        }
+        
+        public IActionResult DetailedProduct(int id)
+        {
+            // Retrieve the product from the database based on the provided id
+            var product = _repo.Products.FirstOrDefault(p => p.ProductId == id);
+    
+            if (product == null)
+            {
+                return NotFound(); // Or handle the case where the product is not found
+            }
+    
+            return View(product); // Pass the product to the DetailedProduct view
+        }
+
+
+
+
+
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+
+        public IActionResult OrderReview(int pageNum = 1, int pageSize = 1000) // name this pageNum, because "page" means something to the .NET environment
+        {
+            var PageInfo = new FraudRoleViewModel
+            {
+                Orders = _repo.Orders
+
+                .OrderBy(x => x.TransactionId)
                 .Skip((pageNum - 1) * pageSize)
                 .Take(pageSize),
 
@@ -46,20 +105,18 @@ namespace IntexLegoSecure.Controllers
                 {
                     CurrentPage = pageNum,
                     ItemsPerPage = pageSize,
-                    TotalItems = primaryColor == null ? _repo.Products.Count() : _repo.Products.Where(x => x.PrimaryColor == primaryColor).Count()
+                    TotalItems = _repo.Orders.Count()
                 },
-
-                CurrentPrimaryColor = primaryColor
             };
 
             return View(PageInfo);
         }
 
-        [Authorize(Roles = "Admin")]
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+
+
+
+
+
 
 
         [Authorize]

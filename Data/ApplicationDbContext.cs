@@ -17,7 +17,7 @@ namespace IntexLegoSecure.Data
 
         //public virtual DbSet<LineItem> LineItems { get; set; }
 
-        //public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
 
         public virtual DbSet<Product> Products { get; set; }
     }
