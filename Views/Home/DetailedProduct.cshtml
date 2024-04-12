@@ -24,7 +24,7 @@
                 <p><strong>Secondary Color:</strong> @Model.SecondaryColor</p>
                 <p><strong>Category:</strong> @Model.Category</p>
                 <p><strong>Description:</strong> @Model.Description</p>
-                <form id="@Model.ProductId" method="post" asp-page="/Cart">
+@*                 <form id="@Model.ProductId" method="post" asp-page="/Cart">
                     <div class="icons">
                         <input type="hidden" asp-for="ProductId" />
                         <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
@@ -34,8 +34,24 @@
                             <span>Add to cart</span>
                         </button>
                     </div>
+                </form> *@
+@*                 <form id=@Model.ProductId method="post" asp-page="/Cart">
+                    <div class="icons">
+                    <input type="hidden" asp-for="ProductId" />
+                    <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                        <button type="submit" class="cart-btn fas fa-shopping-cart">
+                            <span>Add to cart</span>
+                        </button>
+                    <button type="submit" class="btn-outline-success btn-sm float-end">Add to cart</button>
+                    </div>
+                </form> *@
+                <form id=@Model.ProductId method="post" asp-page="/Cart">
+                    <input type="hidden" asp-for="ProductId" />
+                    <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                    <div class="text-center">
+                        <button type="submit" class="btn = btn-primary">Add to Cart</button>
+                    </div>
                 </form>
-
             </div>
         </div>
     </div>

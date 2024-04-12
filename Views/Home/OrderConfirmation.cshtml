@@ -1,0 +1,80 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model IntexLegoSecure.Models.Order
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+        strong {
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <section class="about">
+        </div>
+        <div class="container">
+            <h1>Order Confirmation</h1>
+            <p>Thank you for your order! Your order has been received and is now being processed. Your order details are below:</p>
+            <h2>Order Details:</h2>
+            <ul>
+                <li>Order Number: <strong>123456789</strong></li>
+                <li>Total Amount: <strong>$150.00</strong></li>
+                <li>Estimated Delivery Date: <strong>April 20, 2024</strong></li>
+            </ul>
+            <p>You will receive an email confirmation shortly at <strong>email@example.com</strong>.</p>
+            <p>If you have any questions or need to make changes to your order, please contact us immediately at <strong>support@example.com</strong> or call us at <strong>(123) 456-7890</strong>.</p>
+            <h3>What would you like to do next?</h3>
+            <ul>
+                <li><a href="/shop">Continue Shopping</a></li>
+                <li><a href="/order-status?order_id=123456789">Check Order Status</a></li>
+            </ul>
+        </div>
+    </section>
+</body>
+</html>
