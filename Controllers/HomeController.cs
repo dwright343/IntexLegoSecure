@@ -87,9 +87,6 @@ namespace IntexLegoSecure.Controllers
 
 
 
-
-
-
         [Authorize(Roles = "Admin")]
         public IActionResult Privacy()
         {
@@ -128,8 +125,6 @@ namespace IntexLegoSecure.Controllers
 
 
 
-
-
         [Authorize]
         public IActionResult Secrets()
         {
@@ -164,10 +159,7 @@ namespace IntexLegoSecure.Controllers
 
         //    return View(PageInfo);
         //}
-        public IActionResult AdminProducts()
-        {
-            return View();
-        }
+
     }
 }
 

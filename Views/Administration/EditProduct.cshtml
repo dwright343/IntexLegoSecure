@@ -1,0 +1,186 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model EditProductViewModel
+
+@{
+    ViewBag.Title = "Edit Product";
+}
+
+@{
+Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/css/style.css" />
+
+<section class="about">
+<h1 class="heading">Edit Product</h1>
+
+<form method="post" class="mt-3">
+    <div class="form-group row">
+            <label asp-for="ProductId" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+                <input asp-for="ProductId" disabled class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+            <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+                <input asp-for="Name" class="form-control">
+                <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+            <label asp-for="Year" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+                <input asp-for="Year" class="form-control">
+                <span asp-validation-for="Year" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="NumParts" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="NumParts" class="form-control">
+            <span asp-validation-for="NumParts" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Price" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Price" class="form-control">
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="ImgLink" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="ImgLink" class="form-control">
+            <span asp-validation-for="ImgLink" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="PrimaryColor" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="PrimaryColor" class="form-control">
+            <span asp-validation-for="PrimaryColor" class="text-danger"></span>
+        </div>
+    </div>
+            <div class="form-group row">
+            <label asp-for="SecondaryColor" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+                <input asp-for="SecondaryColor" class="form-control">
+                <span asp-validation-for="SecondaryColor" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Description" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Description" class="form-control">
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Category" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Category" class="form-control">
+            <span asp-validation-for="Category" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a asp-action="AdminProducts" class="btn btn-primary">Cancel</a>
+        </div>
+    </div>
+
+    <div class="card-footer">
+        <a asp-action="EditUsersInRole" asp-controller="Administration"
+            asp-route-roleId="@Model.ProductId" class="btn btn-primary" style="width:auto">Add or Remove Products</a>
+
+</form>
+</section>
+
+<style>
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .col-form-label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .text-danger {
+        color: red;
+    }
+
+    .btn {
+        display: inline-block;
+        font-weight: bold;
+        color: #fff;
+        text-align: center;
+        vertical-align: middle;
+        user-select: none;
+        background-color: #007bff;
+        border: 1px solid transparent;
+        padding: 10px 20px;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: 5px;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    .btn:hover {
+        color: #fff;
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+    .card {
+        margin-top: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        padding: 15px;
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #dee2e6;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        margin-bottom: 10px;
+    }
+
+    .btn-primary {
+        background-color: #ff6a00;
+        border-color: #ff6a00;
+    }
+
+    .btn-primary:hover {
+        background-color: #ff8c33;
+        border-color: #ff8c33;
+    }
+</style>
+

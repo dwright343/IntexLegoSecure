@@ -1,21 +1,74 @@
 ﻿@using IntexLegoSecure.Models
 
-
 @{
-ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home Page";
 }
 @model ProductListViewModel
 <link rel="stylesheet" href="~/css/Style.css" />
+<style>
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* This will create a grid with a flexible number of columns depending on the screen size */
+        grid-gap: 1rem; /* This sets the gap between the grid items */
+        padding: 1rem;
+        margin: 20px auto;
+    }
+
+    .product-card {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: box-shadow 0.3s ease-in-out;
+    }
+
+        .product-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+    /* Add the rest of your styles */
+</style>
+<style>
+        * {
+        box-sizing: border-box;
+    }
+
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-gap: 1rem;
+        padding: 1rem;
+    }
+
+    .product-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 1rem; /* Adjust as needed */
+    }
+
+    .product-card img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .product-card-description {
+        padding: 0.5rem;
+    }
+
+
+
+</style>
 
 <h1 class="heading">Our <span>Products</span> </h1>
 
-
-@* <div class="category-buttons">
-    @foreach(var category in Model.Categories)
-    {
-    <a href="@Url.Action("ListProducts", "Home", new { category = category })" class="category-button" style="background-color: #ff6a00; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 1.2rem; cursor: pointer; transition: background-color 0.3s ease;">@category</a>
-    }
-</div> *@
+<!-- Filter Form -->
 <form method="get" action="@Url.Action("ListProducts", "Home")">
     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; max-width: 90%; margin: 20px auto; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
         <div style="display: flex; width: 100%; justify-content: center; flex-wrap: wrap;">
@@ -56,27 +109,21 @@ ViewData["Title"] = "Home Page";
                 Structure
             </label>
         </div>
-        <input type="submit" value="Filter" class="btn btn-primary" style="margin-top: 10px; width: 100%;" />
+        <input type="submit" value="Filter" class="btn btn-primary" style="margin-top: 10px; width:auto;" />
     </div>
 </form>
 
 
-@foreach (Product product in Model.Products)
-{
-    <!-- Make each product clickable -->
-    <a href="@Url.Action("DetailedProduct", "Home", new { id = product.ProductId })">
-        <partial name="SingleProductPartial" model="product" />
-    </a>
-}
+<div class="products-grid">
+    @foreach (Product product in Model.Products)
+    {
+        <a href="@Url.Action("DetailedProduct", "Home", new { id = product.ProductId })" class="product-card">
+            <partial name="SingleProductPartial" model="product" />
+        </a>
+    }
+</div>
 
-
-
-@* <a asp-controller="Home" asp-action="Index" asp-route-pageNum="1">1</a>
-<a asp-controller="Home" asp-action="Index" asp-route-pageNum="2">2</a>
-<a asp-controller="Home" asp-action="Index" asp-route-pageNum="3">3</a> *@
-
-
-
+<!-- Pagination Links -->
 <div style="text-align: center; margin-top: 20px;" page-model="@Model.PaginationInfo" page-action="ListProducts" page-classes-enabled="true" page-class="btn"
      page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
      page-url-Name="@Model.CurrentPrimaryColor" class="btn-group pull-right m-1"></div>
