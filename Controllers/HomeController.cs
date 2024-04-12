@@ -45,7 +45,7 @@ namespace IntexLegoSecure.Controllers
                 {1, "Fraud" }
             };
 
-            float day = newOrder.Date.Day;
+            //float day = newOrder.Date.Day;
 
 
             var input = new List<float>
@@ -53,7 +53,7 @@ namespace IntexLegoSecure.Controllers
                 (float)newOrder.Time,
                 (float)newOrder.Amount,
 
-                day,
+                //day,
 
                 newOrder.DayOfWeek == "Mon" ? 1 : 0,
                 newOrder.DayOfWeek == "Sat" ? 1 : 0,
