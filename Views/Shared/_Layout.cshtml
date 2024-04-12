@@ -29,11 +29,8 @@
             
             @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
             {
+                <a asp-area="" asp-controller="Administration" asp-action="AdminTools">Admin Tools</a>
 
-                <a asp-controller="Administration"
-                    asp-action="ListUsers">Edit Users</a>
-                <a  asp-controller="Administration"
-                    asp-action="ListRoles">Edit Roles</a>
             }
 
 

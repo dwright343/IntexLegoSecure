@@ -1,10 +1,14 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace IntexLegoSecure.Models;
 
+
 public partial class Order
 {
+    [Key]
     public int TransactionId { get; set; }
 
     public int? CustomerId { get; set; }

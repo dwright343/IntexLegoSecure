@@ -12,5 +12,6 @@ namespace IntexLegoSecure.Models
         }
 
         public IEnumerable<Product> Products => _defaultContext.Products;
+        public IEnumerable<Order> Orders => _defaultContext.Orders;
     }
 }

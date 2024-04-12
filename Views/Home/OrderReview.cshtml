@@ -1,0 +1,96 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@model IEnumerable<Order>
+
+@{
+    ViewData["Title"] = "Order Review";
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <label for="fraudFilter">Fraud:</label>
+    <select id="fraudFilter" onchange="applyFilter()">
+        <option value="">All</option>
+        <option value="1">Fraudulent</option>
+        <option value="0">Not Fraudulent</option>
+    </select>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Customer ID</th>
+            <th>Date</th>
+            <th>Day of Week</th>
+            <th>Time</th>
+            <th>Entry Mode</th>
+            <th>Amount</th>
+            <th>Transaction Type</th>
+            <th>Transaction Country</th>
+            <th>Shipping Country</th>
+            <th>Bank</th>
+            <th>Card Type</th>
+            <th>Fraud</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Order c in Model)
+        {
+            <tr class="fraud-@c.Fraud">
+                <td>@c.CustomerId</td>
+                <td>@c.Date</td>
+                <td>@c.DayOfWeek</td>
+                <td>@c.Time</td>
+                <td>@c.EntryMode</td>
+                <td>@c.Amount</td>
+                <td>@c.TransactionType</td>
+                <td>@c.TransactionCountry</td>
+                <td>@c.ShippingCountry</td>
+                <td>@c.Bank</td>
+                <td>@c.CardType</td>
+                <td>@c.Fraud</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function applyFilter() {
+                var fraudFilter = document.getElementById("fraudFilter").value;
+                var rows = document.querySelectorAll("table tbody tr"); // Selects only rows within tbody
+                rows.forEach(function (row) {
+                    var fraudClass = row.className.split(" ")[1];
+                    if (fraudFilter === "" || fraudClass === "fraud-" + fraudFilter) {
+                        row.style.display = "";
+                    } else {
+                        row.style.display = "none";
+                    }
+                });
+            }
+
+            // Attach event listener directly to the select dropdown
+            document.getElementById("fraudFilter").addEventListener('change', applyFilter);
+
+            // Optionally, apply filter on page load if needed
+            // applyFilter();
+        });
+</script>
+
+</script>

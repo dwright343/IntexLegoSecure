@@ -60,6 +60,12 @@ namespace IntexLegoSecure.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
+        public IActionResult OrderReview()
+        {
+            var order = _repo.Orders;
+            return View(order);
+        }
 
         [Authorize]
         public IActionResult Secrets()
