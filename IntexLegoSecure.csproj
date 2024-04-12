@@ -33,6 +33,8 @@
     <Compile Remove="Components\**" />
     <Compile Remove="Views\Shared\Components\ProjectTypes\**" />
     <Compile Remove="Component\**" />
+    <Compile Remove="ViewModels\DetailedProductViewModel.cs" />
+    <Compile Remove="Views\Home\DetailedProductViewModel.cs" />
   </ItemGroup>
 
   <ItemGroup>

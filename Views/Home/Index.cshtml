@@ -2,7 +2,6 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 @model IEnumerable<Product>
-
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -15,15 +14,11 @@
         <p>Action play and thrills boost the creative fun in this cool LEGO® Sonic the Hedgehog™ Shadow the 
             Hedgehog Escape toy for kids. </p>
         <a asp-area="" asp-controller="Home" asp-action="ListProducts" class="btn">Shop Now</a>
-
     </div>
-
 </section>
-
 
 @if (SignInManager.IsSignedIn(User))
 {
-
     <section class="products" id="products">
 
         <h1 class="heading">Recommended For You</h1>
@@ -71,7 +66,6 @@
         </div>
     </section>
 }
-
 else
 {
     <section class="products" id="products">
