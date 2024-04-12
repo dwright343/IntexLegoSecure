@@ -5,7 +5,7 @@ namespace IntexLegoSecure.ViewModels
 {
     public class FraudRoleViewModel
     {
-        public IEnumerable<Order> Orders { get; set; }
+        public IQueryable<Order> Orders { get; set; }
 
         public PaginationInfo PaginationInfo { get; set; } = new PaginationInfo();
 
