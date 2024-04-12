@@ -40,11 +40,91 @@ namespace IntexLegoSecure.Controllers
             _repo = temp;
             
         }
-            
-         
-        
 
-    
+
+
+        public IActionResult PredictFraud(Order newOrder)
+        {
+
+            //var record = new Order()
+            //{
+            //     = _repo.Orders
+            //    .Where(x => x.customer_ID == 500)
+            //};
+            //newOrder = _repo.Orders
+            //    .Where(x => x. == 500);
+
+
+            //float day = newOrder.Date.Day;
+            DateTime date = DateTime.Today;
+
+            var input = new List<float>
+            {
+                (float)newOrder.Time,
+                (float)newOrder.Amount,                
+
+                //(float)date,
+
+                newOrder.DayOfWeek == "Mon" ? 1 : 0,
+                newOrder.DayOfWeek == "Sat" ? 1 : 0,
+                newOrder.DayOfWeek == "Sun" ? 1 : 0,
+                newOrder.DayOfWeek == "Thu" ? 1 : 0,
+                newOrder.DayOfWeek == "Tue" ? 1 : 0,
+                newOrder.DayOfWeek == "Wed" ? 1 : 0,
+
+                newOrder.EntryMode == "PIN" ? 1 : 0,
+                newOrder.EntryMode == "Tap" ? 1 : 0,
+
+                newOrder.TransactionType == "Online" ? 1 : 0,
+                newOrder.TransactionType == "POS" ? 1 : 0,
+                newOrder.TransactionType == "Online" ? 1 : 0,
+
+                newOrder.TransactionCountry == "India" ? 1 : 0,
+                newOrder.TransactionCountry == "Russia" ? 1 : 0,
+                newOrder.TransactionCountry == "USA" ? 1 : 0,
+                newOrder.TransactionCountry == "UnitedKingdom" ? 1 : 0,
+
+                newOrder.ShippingCountry == "India" ? 1 : 0,
+                newOrder.ShippingCountry == "Russia" ? 1 : 0,
+                newOrder.ShippingCountry == "USA" ? 1 : 0,
+                newOrder.ShippingCountry == "UnitedKingdom" ? 1 : 0,
+
+                newOrder.Bank == "HSBC" ? 1 : 0,
+                newOrder.Bank == "Halifax" ? 1 : 0,
+                newOrder.Bank == "Lloyds" ? 1 : 0,
+                newOrder.Bank == "Metro" ? 1 : 0,
+                newOrder.Bank == "Monzo" ? 1 : 0,
+                newOrder.Bank == "RBS" ? 1 : 0,
+
+                newOrder.CardType == "Visa" ? 1 : 0
+            };
+
+            var inputTensor = new DenseTensor<float>(input.ToArray(), new[] { 1, input.Count });
+
+            var inputs = new List<NamedOnnxValue>
+            {
+                NamedOnnxValue.CreateFromTensor("float_input", inputTensor)
+            };
+
+            var Fraud = new int();
+
+            using (var results = _session.Run(inputs))
+            {
+                var prediction = results.FirstOrDefault(item => item.Name == "output_label")?.AsTensor<long>().ToArray();
+                Fraud = (int)prediction[0];
+            }
+
+            if (Fraud == 0)
+            {
+
+                return View("Confirmation");
+            }
+            else
+            {
+                return View("Review");
+            }
+        }
+
 
         public IActionResult ListProducts(string filter, int pageNum = 1)
         {
