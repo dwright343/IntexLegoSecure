@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = "Edit Role";
 }
-
+<section class="about">
 <h1>Edit Role</h1>
 
 <form method="post" class="mt-3">
@@ -51,8 +51,9 @@
         </div>
         <div class="card-footer">
             <a asp-action="EditUsersInRole" asp-controller="Administration" 
-                asp-route-roleId="@Model.Id" class="btn btn-primary" style="width:auto">Add or Remove Users</a>
+               asp-route-roleId="@Model.Id" class="btn btn-primary" style="width:auto">Add or Remove Users</a>
         </div>
     </div>
 
 </form>
+</section>

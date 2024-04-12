@@ -4,7 +4,11 @@
 @{
     var roleId = ViewBag.roleId;
 }
+@{
+Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
+<section class="about">
 <form method="post">
     <div class="card">
         <div class="card-header">
@@ -31,3 +35,4 @@
         </div>
     </div>
 </form>
+</section>

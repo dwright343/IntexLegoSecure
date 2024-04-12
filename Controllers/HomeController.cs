@@ -21,8 +21,15 @@ namespace IntexLegoSecure.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            // Retrieve products with specific IDs (e.g., 21, 19, 3) from the database
+            var productIds = new List<int> { 21, 19, 3 };
+            var products = _repo.Products.Where(p => productIds.Contains(p.ProductId)).ToList();
+
+            // Pass the products to the view
+            return View(products);
         }
+
+
 
 
         private I_Repository _repo;
