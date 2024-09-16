@@ -1,0 +1,83 @@
+﻿@using IntexLegoSecure.Models
+
+
+@{
+ViewData["Title"] = "Home Page";
+}
+@model ProductListViewModel
+<link rel="stylesheet" href="~/css/Style.css" />
+
+<h1 class="heading">Our <span>Products</span> </h1>
+
+
+@* <div class="category-buttons">
+    @foreach(var category in Model.Categories)
+    {
+    <a href="@Url.Action("ListProducts", "Home", new { category = category })" class="category-button" style="background-color: #ff6a00; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 1.2rem; cursor: pointer; transition: background-color 0.3s ease;">@category</a>
+    }
+</div> *@
+<form method="get" action="@Url.Action("ListProducts", "Home")">
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; max-width: 90%; margin: 20px auto; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <div style="display: flex; width: 100%; justify-content: center; flex-wrap: wrap;">
+            <label style="margin: 5px; flex-grow: 1; text-align: center;">
+                <input type="radio" name="filter" value="" @(Model.CurrentFilter == "" ? "checked" : "")>
+                All Categories
+            </label>
+            <label style="margin: 5px; flex-grow: 1; text-align: center;">
+                <input type="radio" name="filter" value="Minifig" @(Model.CurrentFilter == "Minifig" ? "checked" : "")>
+                Minifig
+            </label>
+            <label style="margin: 5px; flex-grow: 1; text-align: center;">
+                <input type="radio" name="filter" value="Part" @(Model.CurrentFilter == "Part" ? "checked" : "")>
+                Part
+            </label>
+            <label style="margin: 5px; flex-grow: 1; text-align: center;">
+                <input type="radio" name="filter" value="Colorful" @(Model.CurrentFilter == "Colorful" ? "checked" : "")>
+                Colorful
+            </label>
+            <label style="margin: 5px; flex-grow: 1; text-align: center;">
+                <input type="radio" name="filter" value="Vehicle" @(Model.CurrentFilter == "Vehicle" ? "checked" : "")>
+                Vehicle
+            </label>
+            <label style="margin: 5px; flex-grow: 1; text-align: center;">
+                <input type="radio" name="filter" value="Flight" @(Model.CurrentFilter == "Flight" ? "checked" : "")>
+                Flight
+            </label>
+            <label style="margin: 5px; flex-grow: 1; text-align: center;">
+                <input type="radio" name="filter" value="Star Wars" @(Model.CurrentFilter == "Star Wars" ? "checked" : "")>
+                Star Wars
+            </label>
+            <label style="margin: 5px; flex-grow: 1; text-align: center;">
+                <input type="radio" name="filter" value="Harry Potter" @(Model.CurrentFilter == "Harry Potter" ? "checked" : "")>
+                Harry Potter
+            </label>
+            <label style="margin: 5px; flex-grow: 1; text-align: center;">
+                <input type="radio" name="filter" value="Structure" @(Model.CurrentFilter == "Structure" ? "checked" : "")>
+                Structure
+            </label>
+        </div>
+        <input type="submit" value="Filter" class="btn btn-primary" style="margin-top: 10px; width: 100%;" />
+    </div>
+</form>
+
+
+@foreach (Product product in Model.Products)
+{
+    <!-- Make each product clickable -->
+    <a href="@Url.Action("DetailedProduct", "Home", new { id = product.ProductId })">
+        <partial name="SingleProductPartial" model="product" />
+    </a>
+}
+
+
+
+@* <a asp-controller="Home" asp-action="Index" asp-route-pageNum="1">1</a>
+<a asp-controller="Home" asp-action="Index" asp-route-pageNum="2">2</a>
+<a asp-controller="Home" asp-action="Index" asp-route-pageNum="3">3</a> *@
+
+
+
+<div style="text-align: center; margin-top: 20px;" page-model="@Model.PaginationInfo" page-action="ListProducts" page-classes-enabled="true" page-class="btn"
+     page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
+     page-url-Name="@Model.CurrentPrimaryColor" class="btn-group pull-right m-1"></div>
+

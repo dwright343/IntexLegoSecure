@@ -1,0 +1,9 @@
+﻿@model ProductListViewModel
+
+<div class="category-buttons">
+    @foreach(var category in Model.Categories)
+    {
+    <a href="@Url.Action("ListProducts", "Home", new { category = category })" class="category-button">@category</a>
+    }
+</div>
+

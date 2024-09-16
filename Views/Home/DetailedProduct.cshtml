@@ -1,0 +1,106 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Product
+
+<section class="about">
+    <h2 class="heading"> </h2>
+
+    <div class="details">
+        <h2 class="product-title" style="color: #ff6a00;" >@Model.Name</h2>    
+        <div class="image">
+            <img src="@Model.ImgLink" alt="@Model.Name" class="product-image"/>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <div class="attributes-box">
+            <div class="attributes">
+                <p><strong>Year:</strong> @Model.Year</p>
+                <p><strong>Number of Parts:</strong> @Model.NumParts</p>
+                <p><strong>Price:</strong> $@Model.Price</p>
+                <p><strong>Primary Color:</strong> @Model.PrimaryColor</p>
+                <p><strong>Secondary Color:</strong> @Model.SecondaryColor</p>
+                <p><strong>Category:</strong> @Model.Category</p>
+                <p><strong>Description:</strong> @Model.Description</p>
+@*                 <form id="@Model.ProductId" method="post" asp-page="/Cart">
+                    <div class="icons">
+                        <input type="hidden" asp-for="ProductId" />
+                        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+
+                        <!-- Using a button for form submission -->
+                        <button type="submit" class="cart-btn fas fa-shopping-cart">
+                            <span>Add to cart</span>
+                        </button>
+                    </div>
+                </form> *@
+@*                 <form id=@Model.ProductId method="post" asp-page="/Cart">
+                    <div class="icons">
+                    <input type="hidden" asp-for="ProductId" />
+                    <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                        <button type="submit" class="cart-btn fas fa-shopping-cart">
+                            <span>Add to cart</span>
+                        </button>
+                    <button type="submit" class="btn-outline-success btn-sm float-end">Add to cart</button>
+                    </div>
+                </form> *@
+                <form id=@Model.ProductId method="post" asp-page="/Cart">
+                    <input type="hidden" asp-for="ProductId" />
+                    <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                    <div class="text-center">
+                        <button type="submit" class="btn = btn-primary">Add to Cart</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .product-details {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .image {
+        display: flex;
+        justify-content: center; /* Horizontally center the image */
+        align-items: center; /* Vertically center the image */
+        height: 200px; /* Set the height of the container */
+    }
+
+    .image img {
+        max-width: 100%; /* Ensure the image doesn't exceed the container's width */
+        max-height: 100%; /* Ensure the image doesn't exceed the container's height */
+        object-fit: contain; /* Maintain aspect ratio and fit the image within the container */
+    }
+
+    .details {
+        flex: 1;
+    }
+
+    .product-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .attributes-box {
+        background-color: #f5f5f5; /* Light gray background color */
+        padding: 20px; /* Add padding for spacing */
+        border-radius: 5px; /* Add rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    }
+
+    .attributes p {
+        font-size: 1.6rem;
+        margin-bottom: 10px;
+    }
+</style>

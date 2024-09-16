@@ -1,0 +1,49 @@
+﻿
+
+@{
+    ViewData["Title"] = "Admin Tools";
+}
+
+<link rel="stylesheet" href="~/css/style.css" />
+
+<section class="about" id="about">
+
+    <h2 class="heading">Administrator Tools</h2>
+    <div class="content">
+        <div class="button-container">
+            <a class="btn" asp-controller="Administration"
+               asp-action="ListUsers">Edit Users</a>
+
+            <a class="btn" asp-controller="Administration"
+               asp-action="ListRoles">Edit Roles</a>
+
+            <a class="btn" asp-controller="Home"
+               asp-action="OrderReview" asp>Order Review</a>
+        </div>
+    </div>
+</section>
+
+
+<style>
+    .button-container {
+        text-align: center;
+    }
+
+    .btn {
+        display: inline-block;
+        font-weight: 600;
+        font-size: 1.2em;
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        background-color: #ff6a00;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .btn:hover {
+        background-color: #ffc8a1;
+    }
+
+</style>
