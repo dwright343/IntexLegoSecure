@@ -1,0 +1,83 @@
+/* Style the login section */
+.Login .row{
+    width: 100%;
+    max-width: 400px; /* Adjust width as needed */
+    margin: 20px auto; /* Center the login section */
+    padding: 20px;
+    background-color: #f5f5f5; /* Light gray background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+/* Style the heading */
+.heading {
+    margin-top: 100px;
+    font-size: 1.8rem; /* Increase font size */
+}
+
+/* Style the form input and label */
+.form-group {
+    margin-bottom: 20px;
+    padding-left: 10px; /* Add left padding to move slightly to the right */
+    margin-top: 10px;
+}
+
+.form-control {
+    width: calc(100% - 10px); /* Adjust width to accommodate left padding */
+    padding: 12px; /* Increase padding */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px; /* Increase font size */
+}
+
+.row .form-label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 13px; /* Increase font size */
+}
+
+/* Style the error messages */
+.text-danger {
+    color: #dc3545;
+}
+
+/* Style the remember me checkbox */
+.form-check-input {
+    margin-right: 5px;
+    vertical-align: middle; /* Align checkbox vertically */
+
+}
+
+/* Style the submit button */
+#login-submit {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff6a00; /* Adjust button color as needed */
+    color: #fff;
+    font-size: 18px; /* Increase font size */
+    cursor: pointer;
+}
+
+/* Style the submit button on hover */
+#login-submit:hover {
+    background-color: var(--orange); /* Adjust hover color as needed */
+}
+
+/* Style the additional links */
+.additional-links {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 13px;
+}
+
+.additional-links a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.additional-links a:hover {
+    text-decoration: underline;
+}
